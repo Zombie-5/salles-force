@@ -1,0 +1,1251 @@
+/* ======== Estilo Geral ======== */
+body {
+    font-family: system-ui, -apple-system, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+h1, h2 {
+    margin: 0;
+    padding: 0;
+}
+
+p, span {
+    margin: 0;
+    padding: 0;
+    color: #333; /* Texto padrão */
+    font-size: 14px; /* Tamanho base */
+}
+
+/* ======== Topo ======== */
+.topo-2 {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    height: 60px;
+    padding: 8px 20px;
+    background-color: #ffffff; /* Fundo branco */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    position: fixed; /* Fixa no topo */
+    top: 0;
+    width: 100%;
+    z-index: 100; /* Garantir que esteja acima de outros elementos */
+}
+
+.menu-icon-top {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%; /* Ícone redondo */
+    cursor: pointer;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.menu-icon-top:hover {
+    transform: scale(1.1); /* Aumenta levemente no hover */
+    opacity: 0.8; /* Leve transparência */
+}
+
+.topo-2 span {
+    font-size: 16px;
+    font-weight: bold;
+    color: #4A4A4A;
+    letter-spacing: 0.5px; /* Espaçamento entre letras */
+}
+
+/* ======== Rodapé ======== */
+.rodape {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 60px;
+    padding: 10px 0;
+    background-color: #ffffff; /* Fundo branco */
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); /* Sombra superior */
+    position: fixed; /* Fixa no rodapé */
+    bottom: 0;
+    width: 100%;
+    z-index: 100; /* Garantir que esteja acima do conteúdo */
+}
+
+.menu-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: #333;
+}
+
+.menu-icon {
+    width: 30px; /* Tamanho base do ícone */
+    margin-bottom: 5px;
+    transition: transform 0.2s ease, opacity 0.2s ease; /* Animação suave */
+}
+
+.menu-icon:hover {
+    transform: scale(1.1);
+    opacity: 0.8;
+}
+
+.menu-item span {
+    font-size: 12px; /* Texto pequeno */
+}
+
+/* ======== Conteúdo Principal ======== */
+.conteudo-pagina {
+    flex: 1;
+    padding: 80px 20px 80px; /* Espaço para o topo e o rodapé */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: whitesmoke; /* Fundo padrão */
+    justify-content: space-around;
+    overflow: hidden; /* Garante que os filhos sejam contidos */
+    box-sizing: border-box; /* Inclui padding e bordas no tamanho total */
+}
+
+.conteudo-pagina-admin {
+    flex: 1;
+    padding: 50px 20px; /* Espaço para o topo e o rodapé */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: whitesmoke; /* Fundo padrão */
+    overflow: hidden; /* Garante que os filhos sejam contidos */
+    box-sizing: border-box; /* Inclui padding e bordas no tamanho total */
+}
+
+
+/* ======== Cartões ======== */
+.card-vip {
+    background-color: white; /* Fundo branco */
+    width: 90%; /* Largura padrão em dispositivos móveis */
+    max-width: 400px; /* Limita para telas maiores */
+    border-radius: 10px; /* Cantos arredondados */
+    margin: 10px 0;
+    padding: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.card-vip-info {
+    width: 90%;
+    display: flex;
+    align-items: start;
+    justify-content: start;
+    flex-direction: column;
+}
+
+.card-vip-info span {
+    font-size: 14px;
+    margin: 5px 0;
+    color: #333; /* Texto escuro */
+}
+
+.card-vip button {
+    margin-top: 10px;
+    width: 100%;
+    padding: 10px;
+    background-color: #00C0FF; /* Roxo */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s ease; /* Animação de hover */
+}
+
+.card-vip button:hover {
+    background-color: #4bd2ff; /* Tom mais claro de roxo */
+}
+
+/* ======== Cartões ## ======== */
+.card {
+    background-color: white; /* Fundo branco */
+    width: 90%; /* Ocupa toda a largura disponível */
+    max-width: 400px; /* Limite para telas grandes */
+    border-radius: 10px; /* Cantos arredondados */
+    padding: 20px; /* Espaçamento interno */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Espaçamento entre os elementos internos */
+    margin: 20px 0px;
+}
+
+/* ======== Informações do Usuário ======== */
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Espaçamento entre o avatar e o texto */
+}
+
+
+
+.user-info img {
+    width: 60px; /* Tamanho do avatar */
+    height: 60px;
+    border-radius: 50%; /* Avatar redondo */
+    object-fit: cover; /* Ajusta imagem ao contêiner */
+}
+
+.user-info div {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.user-info div .number{
+    font-size: 20px; /* Tamanho do texto para destaque */
+    color: black; /* Cor sutil e elegante */
+    letter-spacing: 1px; /* Espaçamento entre letras */
+    margin: 5px 0px;
+}
+
+.user-info div .titulo {
+    font-size: 15px; /* Tamanho do texto para destaque */
+    color: black; /* Cor sutil e elegante */
+    letter-spacing: 1px; /* Espaçamento entre letras */
+}
+
+.user-info div .titulo-static {
+    font-size: 17px; /* Tamanho do texto para destaque */
+    color: #00C0FF; /* Cor sutil e elegante */
+    letter-spacing: 1px; /* Espaçamento entre letras */
+    margin: 5px 0px;
+}
+
+.card-vip-info .titulo-static {
+    font-size: 20px;
+    font-weight: bold;
+    color: #00C0FF;
+    letter-spacing: 1px;
+    margin: 5px 0px;
+}
+
+.card-vip-info .titulo{
+    font-size: 15px; /* Tamanho do texto para destaque */
+    font-weight: bold; /* Negrito para o nome da plataforma */
+    color: black; /* Cor sutil e elegante */
+    letter-spacing: 1px; /* Espaçamento entre letras */
+    margin: 5px 0px;
+}
+
+/* ======== Informações de Dinheiro ======== */
+.user-money {
+    display: flex;
+    justify-content: space-around;
+}
+
+.user-money div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1; /* Distribui espaço igualmente */
+    min-width: 100px; /* Largura mínima */
+}
+
+.sup {
+    font-size: 18px; /* Valor em destaque */
+    font-weight: bold;
+    color: #333;
+}
+
+.sub {
+    font-size: 12px; /* Descrição do valor */
+    color: #777;
+}
+
+/* ======== Botões de Ação ======== */
+.menu-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: #333;
+    gap: 5px;
+}
+
+.menu-icon-2 {
+    width: 40px; /* Ícones dos botões */
+    height: 40px;
+}
+
+.sub-2 {
+    font-size: 12px; /* Texto dos botões */
+    text-align: center;
+    color: #555;
+}
+
+/* Botão Sair */
+.btn-sair {
+    text-decoration: none;
+    background-color: #00C0FF; /* Roxo */
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    width: 90%; /* Botão ocupa toda a largura */
+    max-width: 400px; /* Limite em telas grandes */
+    transition: background-color 0.3s ease; /* Animação no hover */
+}
+
+.btn-sair:hover {
+    background-color: #4bd2ff; /* Tom mais escuro */
+}
+
+hr {
+    width: 100%;
+    border: none;
+    border-top: 2px solid #ddd;
+}
+
+.card-vip-info .item{
+    font-size: 14px; /* Tamanho do texto para destaque */
+    font-weight: bold; /* Negrito para o nome da plataforma */
+    color: black; /* Cor sutil e elegante */
+    letter-spacing: 1px; /* Espaçamento entre letras */
+}
+
+.card-vip-info .suave{
+    font-size: 14px; /* Tamanho do texto para destaque */
+    font-weight: bold; /* Negrito para o nome da plataforma */
+    color: #4A4A4A; /* Cor sutil e elegante */
+    letter-spacing: 1px; /* Espaçamento entre letras */
+}
+
+.card-vip-info .item-tempo{
+    font-size: 20px; /* Tamanho do texto para destaque */
+    font-weight: bold; /* Negrito para o nome da plataforma */
+    color: #4A4A4A; /* Cor sutil e elegante */
+    letter-spacing: 1px; /* Espaçamento entre letras */
+}
+
+
+/* ======== Responsividade ======== */
+
+/* Ajuste para tablets */
+@media (max-width: 768px) {
+    .topo-2 {
+        height: 50px; /* Reduz a altura */
+        padding: 5px 10px;
+    }
+
+    .menu-icon-top {
+        width: 30px;
+        height: 30px;
+    }
+
+    .topo-2 span {
+        font-size: 14px;
+    }
+
+    .rodape {
+        height: 70px; /* Rodapé maior */
+    }
+
+    .menu-item span {
+        font-size: 10px;
+    }
+
+    .card-vip {
+        width: 95%; /* Maior largura */
+        margin: 8px 0;
+    }
+
+    .card-vip-info span {
+        font-size: 12px;
+    }
+
+    .card-vip button {
+        padding: 8px;
+        font-size: 14px;
+    }
+
+    .menu-icon-2 {
+        width: 35px; /* Ícones menores */
+        height: 35px;
+    }
+
+    .btn-sair {
+        font-size: 13px; /* Texto menor */
+    }
+
+    th, td {
+        font-size: 12px; /* Texto menor em dispositivos menores */
+        padding: 5px; /* Reduz o espaçamento interno */
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .titulo-pagina {
+        font-size: 1.5rem;
+    }
+
+    .card-config {
+        padding: 0.75rem;
+    }
+
+    .icon {
+        width: 20px;
+        height: 20px;
+        margin-right: 0.75rem;
+    }
+
+    .card-config span {
+        font-size: 0.9rem;
+    }
+
+}
+
+/* Ajuste para smartphones */
+@media (max-width: 480px) {
+    .topo-2 {
+        height: 45px; /* Altura ainda menor */
+        padding: 5px;
+    }
+
+    .menu-icon-top {
+        width: 25px;
+        height: 25px;
+    }
+
+    .rodape {
+        height: 60px; /* Reduzido para economizar espaço */
+    }
+
+    .menu-item span {
+        font-size: 9px;
+    }
+
+    .card-vip-info span {
+        font-size: 10px; /* Texto menor */
+    }
+
+    .card-vip button {
+        font-size: 12px;
+        padding: 6px; /* Botão mais compacto */
+    }
+
+    .card {
+        padding: 15px; /* Reduz o espaçamento interno */
+    }
+
+    .user-info img {
+        width: 50px; /* Avatar menor */
+        height: 50px;
+    }
+
+    .user-money div {
+        min-width: 80px; /* Largura mínima reduzida */
+    }
+
+    .sup {
+        font-size: 16px; /* Texto menor */
+    }
+
+    .sub {
+        font-size: 10px;
+    }
+
+    .btn-sair {
+        font-size: 12px;
+        padding: 8px 15px;
+    }
+
+    .menu-icon-2 {
+        width: 30px; /* Ícones menores */
+        height: 30px;
+    }
+
+    .sub-2 {
+        font-size: 10px;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .amount-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+
+/* Main content styles */
+.main {
+    flex: 1;
+    padding-bottom: 1rem;
+}
+
+.hero-banner {
+    position: relative;
+    width: 100%;
+    height: 12rem;
+    overflow: hidden; /* Oculta partes fora da área visível */
+    border-radius: 0.5rem;
+}
+
+.carousel {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.carousel-inner {
+    display: flex;
+    width: 300%; /* 100% * number of images */
+    height: 100%;
+    animation: carousel 15s infinite; /* Adjust time as needed */
+}
+
+.carousel-inner img {
+    width: 33.333%; /* 100% / number of images */
+    height: 100%;
+    object-fit: cover;
+}
+
+@keyframes carousel {
+    0%, 33.33% {
+        transform: translateX(0);
+    }
+    33.34%, 66.66% {
+        transform: translateX(-33.333%);
+    }
+    66.67%, 100% {
+        transform: translateX(-66.666%);
+    }
+}
+
+/* Pause animation on hover for accessibility */
+.carousel:hover .carousel-inner {
+    animation-play-state: paused;
+}
+
+/* News section styles */
+.news-section {
+    margin-top: 1rem;
+}
+
+.news-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.news-card {
+    background: white;
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+/* Menu grid styles */
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-top: 0.5rem;
+}
+
+.menu-card {
+    background: white;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    margin-top: 1rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    text-decoration: none;
+    gap: 8px;
+}
+
+.online-service-button {
+    display: flex;
+    align-items: center;
+    background-color: #6bda75d7;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 15px;
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+    transition: background-color 0.3s;
+    margin-top: 1rem;
+}
+
+.online-service-button:hover {
+    background-color: #c8e6c9;
+}
+
+.online-service-button .icon {
+    margin-right: 15px;
+}
+
+.online-service-button .icon svg {
+    width: 24px;
+    height: 24px;
+    color: #4caf50;
+}
+
+.online-service-button .text {
+    display: flex;
+    flex-direction: column;
+}
+
+.online-service-button .title {
+    font-weight: bold;
+    color: #000;
+}
+
+.online-service-button .subtitle {
+    font-size: 0.8em;
+    color: #666;
+}
+
+/* Contêiner da Tabela Responsiva */
+.responsive-table {
+    width: 100%; /* Ocupa toda a largura da tela */
+    overflow-x: hidden; /* Remove a possibilidade de rolagem horizontal */
+}
+
+/* Estilos da Tabela */
+table {
+    width: 100%; /* Garante que a tabela se ajuste ao tamanho da tela */
+    table-layout: auto; /* Calcula as larguras das colunas automaticamente */
+    border-collapse: collapse; /* Remove espaços entre células */
+    background-color: #fff; /* Cor de fundo */
+    border-radius: 10px; /* Cantos arredondados */
+}
+
+/* Estilização para Cabeçalhos e Células */
+th, td {
+    padding: 8px; /* Espaçamento interno */
+    text-align: left; /* Alinhamento do texto */
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1); /* Linha divisória */
+    word-wrap: break-word; /* Quebra de palavras longas */
+    white-space: normal; /* Permite quebra de linha para conteúdo longo */
+}
+
+/* Cabeçalhos */
+thead {
+    color: #0379ff; /* Cor do texto */
+    font-weight: bold; /* Negrito */
+}
+
+/* Linhas Alternadas no Corpo da Tabela */
+tbody tr:nth-child(even) {
+    background-color: #f9f9f9; /* Cor diferente para linhas pares */
+}
+
+.input-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 40px 0px 10px 0px;
+    align-items: center;
+}
+
+.input-btn input {
+    width: 100%;
+    max-width: 300px;
+    padding: 5px 10px;
+    border: 1px solid #ddd; /* Borda sutil */
+    border-radius: 5px; /* Cantos arredondados */
+    font-size: 14px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); /* Sombra leve */
+    transition: box-shadow 0.3s ease;
+}
+
+.input-btn a {
+    display: inline-block;
+    padding: 5px 10px;
+    color: white;
+    background-color: #00C0FF;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.input-btn input:focus {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Sombra ao focar */
+    outline: none; /* Remove contorno padrão */
+}
+
+.input-btn button {
+    padding: 5px 15px;
+    border: none;
+    background-color: #00C0FF; /* Cor do botão */
+    color: white;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.input-btn button:hover {
+    background-color: #2bb7e6; /* Tom mais claro */
+}
+
+/* Dashboard */
+
+.conteudo-pagina-dashboard {
+    max-width: 1200px;
+    padding: 50px 20px; /* Espaço para o topo e o rodapé */
+    background-color: whitesmoke; /* Fundo padrão */
+    overflow: hidden; /* Garante que os filhos sejam contidos */
+    box-sizing: border-box; /* Inclui padding e bordas no tamanho total */
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 30px 0px;
+    
+}
+
+.stat-card {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.stat-card h2 {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.stat-card p {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin: 0;
+}
+
+.icon {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 10px;
+    color: #3b82f6;
+}
+
+.chart-container {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 50px;
+}
+
+/* config */
+.titulo-pagina {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 1rem  0px 2rem 0px;
+    color: #333;
+}
+
+.grid-configuracoes {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.card-config {
+    display: flex;
+    padding: 1rem;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+    color: #333;
+}
+
+.card-config:hover {
+    background-color: #f3f4f6;
+}
+
+.icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 1rem;
+    color: #3b82f6;
+}
+
+.card-config span {
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.logout-form {
+    display: flex;
+    justify-content: center;
+}
+
+.btn-logout {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 1.5rem;
+    background-color: #ef4444;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-logout:hover {
+    background-color: #dc2626;
+}
+
+.icon-logout {
+    width: 24px;
+    height: 24px;
+    margin-right: 0.5rem;
+}
+
+/*  */
+/* Estilo para o formulário */
+.form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.form span {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.form button {
+    background-color: #00C0FF;
+    border: none;
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+    width: 90%;
+    height: 30px;
+    padding: 0px 20px;
+    border-radius: 10px;
+}
+
+.form input {
+    width: 90%; /* Ocupe 90% da largura da tela */
+    height: 30px;
+    padding: 0px 20px; /* Maior área de toque */
+    margin: 10px 0;
+    box-sizing: border-box;
+    border-radius: 10px;
+    background-color: transparent;
+    color: #333;
+    border: solid 1px #333;
+    font-size: 3vw; /* Tamanho de fonte mais confortável */
+    transition: all 0.3s ease;
+}
+
+.ajust{
+    margin: 10px 0px;
+    width: 77%; /* Ocupe 90% da largura da tela */
+    height: 30px;
+    padding: 0px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+}
+
+/* Cor dos placeholders */
+::placeholder {
+    color: #aaa; /* Cor mais suave para os placeholders */
+    opacity: 1;
+}
+
+/*  */
+
+.balance-card {
+    background-color: transparent;
+    color: #333;
+    font-weight: bold;
+    border-radius: 10px; /* Cantos arredondados */
+    padding: 15px; /* Espaçamento interno */
+    
+    display: flex;
+    align-items: center; /* Centralizar conteúdo */
+    justify-content: space-between;
+    box-sizing: border-box; /* Inclui padding no tamanho total */
+}
+
+.recharge-section {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    
+}
+
+.recharge-section input {
+    width: 100%; /* Ocupe 90% da largura da tela */
+    padding: 15px; /* Maior área de toque */
+    background-color: #ffffff; /* Fundo branco */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    box-sizing: border-box;
+    border-radius: 10px;
+    border: none;
+    font-size: 4vw; /* Tamanho de fonte mais confortável */
+    outline: none;
+}
+
+.registros-btn {
+    background: #00b4d8;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.amount-input {
+    width: 100%;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+
+.amount-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.amount-btn {
+    background: #00b4d8;
+    border: none;
+    padding: 10px;
+    border-radius: 20px;
+    color: white;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.amount-btn.selected {
+    background-color: #007bff; /* Cor mais escura para o botão selecionado */
+    color: #fff;
+    border-color: #0056b3;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 15px;
+    background: #00b4d8;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-size: 1.1rem;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.instructions {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.instructions p {
+    margin-bottom: 10px;
+}
+
+@media (max-width: 480px) {
+    .amount-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.select-div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    width: 100%;
+}
+
+.bank-select {
+    width: 100%;
+}
+
+.bank-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    width: 100%;
+    
+}
+
+.bank-info div {
+    width: 100%; /* Ocupe 90% da largura da tela */
+    padding: 15px; /* Maior área de toque */
+    background-color: #ffffff; /* Fundo branco */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    box-sizing: border-box;
+    border-radius: 10px;
+    border: none;
+    font-size: 4vw; /* Tamanho de fonte mais confortável */
+    margin: 20px 0px;
+}
+
+.select-div a {
+    padding: 10px 10px;
+    color: white;
+    background-color: #00C0FF;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 90%;
+    text-align: center;
+}
+
+/* Estiliza o select para remover a borda e ajustar o estilo */
+select {
+    appearance: none; /* Remove o estilo padrão do navegador */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-color: transparent; /* Cor de fundo */
+    color: #333;
+    padding: 10px 15px; /* Espaçamento interno */
+    border-radius: 5px; /* Bordas arredondadas */
+    border: none; /* Cor da borda */
+    font-size: 14px; /* Tamanho da fonte */
+    width: 100%; /* Para o select ocupar toda a largura disponível */
+    box-sizing: border-box; /* Inclui o padding no cálculo da largura */
+    transition: all 0.3s ease; /* Animação suave ao passar o mouse */
+}
+
+/* Efeito de foco */
+select:focus {
+    outline: none; /* Remove o outline padrão */
+    background-color: transparent; /* Cor de fundo quando estiver em foco */
+}
+
+/* Estiliza a seta do select */
+select::-ms-expand {
+    display: none; /* Remove a seta no Internet Explorer */
+}
+
+/* Quando o select tem um valor selecionado, o fundo pode mudar */
+select:valid {
+    background-color: transparent; /* Cor de fundo quando há valor selecionado */
+}
+
+select option {
+    background-color: transparent; /* Cor de fundo das opções */
+}
+
+.btn-primary {
+    background-color: #00C0FF; /* Cor de fundo ativa */
+    border: none;
+    color: white; /* Cor do ícone */
+    width: 60px;
+    height: 60px;
+    border-radius: 50%; /* Faz o botão circular */
+    position: fixed; /* Fixa na tela */
+    bottom: 100px; /* Distância da parte inferior */
+    right: 50px; /* Distância da parte direita */
+    z-index: 1000; /* Garante que fique acima de outros elementos */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para destaque */
+    cursor: pointer;
+    transition: background-color 0.3s; /* Animação ao passar o mouse */
+}
+
+.btn-primary:hover:not(:disabled) {
+    background-color: #008CBA; /* Cor ao passar o mouse */
+}
+
+.btn-primary:disabled {
+    background-color: #A3D4F7; /* Tom azul para estado desativado */
+    color: #e6f4fd; /* Cor do ícone no estado desativado */
+    cursor: not-allowed; /* Cursor para estado desabilitado */
+    box-shadow: none; /* Remove a sombra no estado desativado */
+}
+
+.trans{
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0px;
+}
+
+.span-action {
+    font-size: 30px;
+}
+
+.div-data{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.text-green {
+    color: green;
+}
+
+.text-red {
+    color: red;
+}
+
+/* sobre-nos.css */
+
+/* Estilo geral para a página */
+.conteudo-pagina-about {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 30px auto;
+    max-width: 900px;
+    padding: 15px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Título principal */
+.conteudo-pagina-about h1 {
+    font-size: 32px;
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Títulos das seções */
+.conteudo-pagina-about h2 {
+    font-size: 24px;
+    color: #008cbb; /* Verde para destaque */
+    margin-top: 20px;
+    border-bottom: 2px solid #00C0FF;
+    padding-bottom: 5px;
+}
+
+/* Parágrafos */
+.conteudo-pagina-about p {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 15px;
+    text-align: justify;
+}
+
+/* Listas */
+.conteudo-pagina-about ul {
+    padding-left: 20px;
+    margin-bottom: 20px;
+}
+
+.conteudo-pagina-about ul li {
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: #333;
+}
+
+/* Destaques (negrito e cor) */
+.conteudo-pagina-about strong {
+    color: #008cbb;
+    font-weight: bold;
+}
+
+/* Container */
+.container {
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.conteudo-pagina-about a {
+    color: #008cbb;
+    text-decoration: none;
+}
+
+.conteudo-pagina-about a:hover {
+    text-decoration: underline;
+}
+
+
+.tab-list {
+    display: flex;
+    width: 100%;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-bottom: 1px solid #ccc;
+}
+.tab-item {
+    flex: 1;
+}
+.tab-link {
+    display: block;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    color: #333;
+    background-color: #f1f1f1;
+}
+.tab-link.active {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-bottom: none;
+}
+.tab-content {
+    padding: 20px;
+    width: 100%;
+    border-top: none;
+}
+.tab-pane {
+    display: none;
+}
+.tab-pane.active {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+}
