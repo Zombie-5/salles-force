@@ -13,7 +13,7 @@ class AppController extends Controller
     public function generateInviteLink()
     {
         // Obter o usuário autenticado
-        $baseURL = 'http://127.0.0.1:8000/cadastrar';
+        $baseURL = 'https://salles-force.onrender.com/cadastrar';
         $encodeId = base64_encode(Auth::user()->id);
         return $baseURL . '/' . $encodeId;
     }
