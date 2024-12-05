@@ -30,7 +30,7 @@ RUN npm install && npm run prod
 
 # Permissões corretas para as pastas
 RUN chown -R www-data:www-data /var/www/html \
-    && chmod -R 755 /var/www/html/storage /var/www/html/bootstrap/cache
+    && chmod -R 755 /var/www/html/storage /var/www/html/bootstrap/cache /var/www/html/public
 
 # Instalar netcat para testar conexões
 RUN apt-get install -y netcat
