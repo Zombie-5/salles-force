@@ -15,7 +15,12 @@ RUN apt-get update && apt-get install -y \
     curl \
     && docker-php-ext-install pdo_pgsql mbstring exif pcntl bcmath gd
 
-# Instalar o Composer (diretamente no contêiner)
+# Instalar Node.js e npm (versão estável)
+RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash - \
+    && apt-get install -y nodejs \
+    && npm install -g npm@latest
+
+    # Instalar o Composer (diretamente no contêiner)
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 # Copiar o código do aplicativo Laravel para o contêiner
