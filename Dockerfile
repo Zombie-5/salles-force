@@ -24,9 +24,14 @@ COPY . .
 # Instalar as dependências do Laravel com o Composer
 RUN composer install --no-dev --optimize-autoloader
 
+
 # Permissões corretas para as pastas
 RUN chown -R www-data:www-data /var/www/html \
     && chmod -R 755 /var/www/html/storage /var/www/html/bootstrap/cache
+
+# Rodar as migrations e seeds (sempre que o contêiner iniciar)
+RUN php artisan migrate --force
+RUN php artisan db:seed --force
 
 # Expor a porta para o Laravel
 EXPOSE 8000
