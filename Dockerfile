@@ -29,6 +29,9 @@ RUN composer install --no-dev --optimize-autoloader
 RUN chown -R www-data:www-data /var/www/html \
     && chmod -R 755 /var/www/html/storage /var/www/html/bootstrap/cache
 
+# Defina a variável de ambiente diretamente no Dockerfile
+ENV DB_HOST=dpg-ct8mtc68ii6s73cd121g-a
+
 # Espera o banco de dados estar disponível
 RUN apt-get install -y netcat
 RUN until nc -z -v -w30 $DB_HOST 5432; do echo "Aguardando banco de dados..."; sleep 5; done
