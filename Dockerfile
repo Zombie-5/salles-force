@@ -30,8 +30,18 @@ RUN composer install --no-dev --optimize-autoloader
 RUN chown -R www-data:www-data /var/www/html \
     && chmod -R 755 /var/www/html/storage /var/www/html/bootstrap/cache
 
+# Instalar netcat para testar conexões
+RUN apt-get install -y netcat
+
+# Script de entrada para garantir que o banco está disponível e rodar comandos
+COPY docker-entrypoint.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+
 # Expor a porta para o Laravel
 EXPOSE 8000
 
 # Comando inicial para o Laravel
-CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]
+#CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]
+
+# Usar o script como comando inicial
+ENTRYPOINT ["docker-entrypoint.sh"]
