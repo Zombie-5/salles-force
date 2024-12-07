@@ -7,7 +7,7 @@
                 <img src="{{ asset('img/logo.jpg') }}" alt="Home">
                 <div>
                     <span class="number">{{$user->telefone}}</span>
-                    <span class="titulo">ID: <span class="titulo-static">{{$user->id}}</span></span>
+                    <span class="titulo">ID: <span class="titulo-static">{{1852+$user->id}}</span></span>
                 </div>
             </div>
             <hr>
