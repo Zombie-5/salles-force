@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Machine;
 use App\Transaction;
+use App\Record;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -96,10 +97,10 @@ class AppController extends Controller
     public function records()
     {
         $user = Auth::user();
-        $transactions = Transaction::where('userId', $user->id)
+        $records = Record::where('user_id', $user->id)
             ->orderBy('created_at', 'desc')
             ->get();
-        return view('app.records', compact('transactions'));
+        return view('app.records', compact('records'));
     }
 
     public function withdraw()

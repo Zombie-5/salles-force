@@ -14,6 +14,11 @@
             <input type="hidden" name="action" id="form-action" value="depositar">
             <input type="text" name="custom_amount" id="custom-amount" placeholder="Insira a quantia em kwanzas">
 
+            <div class="news-header">
+                <h2></h2>
+                <a href="{{ route('app.records.deposit') }}" class="more-link">Registros de Recargas</a>
+            </div>
+
             <div class="amount-grid">
                 <button type="button" class="amount-btn" data-value="10000">10000</button>
                 <button type="button" class="amount-btn" data-value="20000">20000</button>

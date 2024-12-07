@@ -14,18 +14,12 @@
             <input type="hidden" name="action" id="form-action" value="retirar">
             <input type="text" name="custom_amount" id="custom-amount" placeholder="Insira a quantia em kwanzas">
 
-            <div class="amount-grid">
-                <button type="button" class="amount-btn" data-value="9000">9000</button>
-                <button type="button" class="amount-btn" data-value="10000">10000</button>
-                <button type="button" class="amount-btn" data-value="20000">20000</button>
-                <button type="button" class="amount-btn" data-value="40000">40000</button>
-                <button type="button" class="amount-btn" data-value="60000">60000</button>
-                <button type="button" class="amount-btn" data-value="100000">100000</button>
-                <button type="button" class="amount-btn" data-value="150000">150000</button>
-                <button type="button" class="amount-btn" data-value="300000">300000</button>
+            <br>
+            <div>
+                <button type="submit" class="submit-btn">Retirar</button>
+                <a class="ajust2" href="{{ route('app.records.withdraw') }}">Registros</a>
             </div>
 
-            <button type="submit" class="submit-btn">Enviar</button>
 
             <div class="instructions">
                 <p>O valor mínimo do depósito é de 10.000KZ (horário de carregamento: 9h00 às 21h00)</p>

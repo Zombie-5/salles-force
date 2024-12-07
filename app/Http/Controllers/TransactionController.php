@@ -22,6 +22,26 @@ class TransactionController extends Controller
         return view('admin.app.transaction', ['transactions' => $transactions]);
     }
 
+    public function indexDeposit()
+    {
+        $user = Auth::user();
+        $transactions = Transaction::where('userId', $user->id)
+            ->where('action', 'depositar')
+            ->orderBy('created_at', 'desc')
+            ->get();
+        return view('app.transaction.records-deposit', compact('transactions'));
+    }
+
+    public function indexWithdraw()
+    {
+        $user = Auth::user();
+        $transactions = Transaction::where('userId', $user->id)
+            ->where('action', 'retirar')
+            ->orderBy('created_at', 'desc')
+            ->get();
+        return view('app.transaction.records-withdraw', compact('transactions'));
+    }
+
     public function updateStatus(Request $request, $id)
     {
         // Validar o status recebido
@@ -105,7 +125,7 @@ class TransactionController extends Controller
         // Recuperando o usuário logado
         $userId = Auth::user();
         $user = User::findOrFail($userId->id);
-        
+
         // Recuperando a ação (depositar ou retirar)
         $action = $request->input('action');
         $depositAmount = $request->input('query') ?: $request->input('custom_amount');

@@ -724,7 +724,7 @@ h1 {
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 20px;
     padding: 30px 0px;
-    
+
 }
 
 .stat-card {
@@ -901,7 +901,7 @@ h1 {
     font-weight: bold;
     border-radius: 10px; /* Cantos arredondados */
     padding: 15px; /* Espaçamento interno */
-    
+
     display: flex;
     align-items: center; /* Centralizar conteúdo */
     justify-content: space-between;
@@ -913,7 +913,7 @@ h1 {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    
+
 }
 
 .recharge-section input {
@@ -983,6 +983,28 @@ h1 {
     margin-bottom: 20px;
 }
 
+.ajust2{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+
+    background: #00b4d8;
+    color: #fff;
+
+    padding: 10px 0px;
+    width: 100%; /* Ocupe 90% da largura da tela */
+    height: 30px;
+
+
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
 .instructions {
     font-size: 0.9rem;
     line-height: 1.5;
@@ -1017,7 +1039,7 @@ h1 {
     justify-content: space-between;
     flex-direction: column;
     width: 100%;
-    
+
 }
 
 .bank-info div {
@@ -1114,9 +1136,9 @@ select option {
 
 .trans{
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
-    padding: 0px;
+    padding: 5px 10px;
 }
 
 .span-action {
@@ -1127,6 +1149,7 @@ select option {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    margin: 10px;
 }
 
 .text-green {
