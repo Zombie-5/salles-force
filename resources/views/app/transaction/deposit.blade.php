@@ -50,6 +50,21 @@
             const customAmountInput = document.getElementById('custom-amount');
             let isAmountSelected = false;
 
+            if (customAmountInput.value === '') {
+                amountButtons.forEach(button => {
+                    button.addEventListener('click', () => {
+                        // Remove a classe 'selected' de todos os botões
+                        amountButtons.forEach(btn => btn.classList.remove('selected'));
+
+                        // Define o valor no input oculto
+                        depositAmountInput.value = '';
+
+                        // Marca que um valor foi selecionado
+                        isAmountSelected = false;
+                    });
+                });
+            }
+
             // Adiciona evento aos botões de valor predefinido
             amountButtons.forEach(button => {
                 button.addEventListener('click', () => {
@@ -63,7 +78,7 @@
                     depositAmountInput.value = button.getAttribute('data-value');
 
                     // Limpa o campo de entrada personalizada
-                    customAmountInput.value = '';
+                    customAmountInput.value = button.getAttribute('data-value');
 
                     // Marca que um valor foi selecionado
                     isAmountSelected = true;

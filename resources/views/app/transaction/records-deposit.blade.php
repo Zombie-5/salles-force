@@ -23,5 +23,6 @@
             </div>
         </div>
         @endforelse
+        <br><br>
     </div>
 @endsection

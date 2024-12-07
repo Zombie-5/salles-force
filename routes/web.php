@@ -41,6 +41,8 @@ Route::middleware('autenticacao')->prefix('/app')->group(function () {
     Route::get('/bank-edit', 'AppController@editBank')->name('app.bank.edit');
 
     Route::get('/deposit', 'AppController@deposit')->name('app.deposit');
+    Route::get('/select-bank-account', 'TransactionController@selecionarBanco')->name('selecionar.banco');
+
     Route::get('/withdraw', 'AppController@withdraw')->name('app.withdraw');
 
     Route::get('/records', 'AppController@records')->name('app.records');
@@ -70,7 +72,6 @@ Route::middleware('autenticacao')->prefix('/master')->group(function () {
     Route::get('/transaction', 'TransactionController@index')->name('transaction.index');
     Route::patch('/transactions/{id}', 'TransactionController@updateStatus')->name('transaction.status');
     Route::post('/transaction/user', 'TransactionController@store')->name('transaction.store');
-    Route::get('/select-bank-account', 'TransactionController@selecionarBanco')->name('selecionar.banco');
 
     Route::get('/machine-list', 'MachineController@index')->name('admin.machine.index');
     Route::get('/machine-show/{machine}', 'MachineController@show')->name('admin.machine.show');

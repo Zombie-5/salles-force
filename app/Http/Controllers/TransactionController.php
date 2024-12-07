@@ -142,7 +142,7 @@ class TransactionController extends Controller
                 'userId' => $user->id,
             ]);
 
-            return redirect()->route('app.records')->with('success', 'Depósito solicitado com sucesso!');
+            return redirect()->route('selecionar.banco')->with('success', 'Depósito solicitado com sucesso!');
         } elseif ($action === 'retirar') {
             // Lógica de retirada
             $transaction = Transaction::create([
@@ -156,7 +156,7 @@ class TransactionController extends Controller
             $user->money -= $transaction->money;
             $user->save();
 
-            return redirect()->route('app.records')->with('success', 'Retirada solicitada com sucesso!');
+            return redirect()->route('app.records.withdraw')->with('success', 'Retirada solicitada com sucesso!');
         }
 
         // Caso a ação seja inválida
@@ -171,13 +171,15 @@ class TransactionController extends Controller
 
         // Verifica se há um banco selecionado e o passa para a view
         $selectedBank = null;
+        $money = 20000;
         if ($request->has('banco_id')) {
             $selectedBank = Banco::find($request->input('banco_id'));
         }
         // Retorna a view com os bancos e o banco selecionado
         return view('app.transaction.selectBank', [
             'bancos' => $bancos,
-            'selectedBank' => $selectedBank
+            'selectedBank' => $selectedBank,
+            'money' => $money
         ]);
     }
     /**
