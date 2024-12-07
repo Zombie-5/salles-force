@@ -89,7 +89,8 @@ class AppController extends Controller
     public function deposit()
     {
         $user = Auth::user();
-        return view('app.transaction.deposit', ['user' => $user]);
+        $banco = $user->banco;
+        return view('app.transaction.deposit', ['user' => $user, 'bancos' => $banco]);
     }
 
     public function records()

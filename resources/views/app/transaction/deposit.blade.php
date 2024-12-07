@@ -13,16 +13,16 @@
             <input type="hidden" name="query" id="deposit-amount">
             <input type="hidden" name="action" id="form-action" value="depositar">
             <input type="text" name="custom_amount" id="custom-amount" placeholder="Insira a quantia em kwanzas">
- 
+
             <div class="amount-grid">
-                <button type="button" class="amount-btn" data-value="9000">9000</button>
                 <button type="button" class="amount-btn" data-value="10000">10000</button>
                 <button type="button" class="amount-btn" data-value="20000">20000</button>
-                <button type="button" class="amount-btn" data-value="40000">40000</button>
-                <button type="button" class="amount-btn" data-value="60000">60000</button>
-                <button type="button" class="amount-btn" data-value="100000">100000</button>
+                <button type="button" class="amount-btn" data-value="55000">55000</button>
                 <button type="button" class="amount-btn" data-value="150000">150000</button>
-                <button type="button" class="amount-btn" data-value="300000">300000</button>
+                <button type="button" class="amount-btn" data-value="250000">25000</button>
+                <button type="button" class="amount-btn" data-value="350000">350000</button>
+                <button type="button" class="amount-btn" data-value="700000">700000</button>
+                <button type="button" class="amount-btn" data-value="1000000">1000000</button>
             </div>
 
             <button type="submit" class="submit-btn">Enviar</button>
