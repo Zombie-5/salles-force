@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Machine;
 use App\User;
+use App\Record;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -194,6 +195,12 @@ class UserController extends Controller
             $superiorNivel1->incomeToday += $comissaoNivel1;
             $superiorNivel1->incomeTotal += $comissaoNivel1;
             $superiorNivel1->save();
+
+            Record::create([
+                'name' => 'Bônus Convidado',
+                'money' => $comissaoNivel1,
+                'user_id' => $superiorNivel1->id,
+            ]);
         }
 
         // Comissão de 5% para o superior de nível 2 (indiretamente)
@@ -204,6 +211,12 @@ class UserController extends Controller
             $superiorNivel2->incomeToday += $comissaoNivel2;
             $superiorNivel2->incomeTotal += $comissaoNivel2;
             $superiorNivel2->save();
+
+            Record::create([
+                'name' => 'Bônus Convidado',
+                'money' => $comissaoNivel2,
+                'user_id' => $superiorNivel2->id,
+            ]);
         }
 
         // Comissão de 2% para o superior de nível 3 (indiretamente)
@@ -214,6 +227,12 @@ class UserController extends Controller
             $superiorNivel3->incomeToday += $comissaoNivel3;
             $superiorNivel3->incomeTotal += $comissaoNivel3;
             $superiorNivel3->save();
+
+            Record::create([
+                'name' => 'Bônus Convidado',
+                'money' => $comissaoNivel3,
+                'user_id' => $superiorNivel3->id,
+            ]);
         }
 
 
@@ -266,6 +285,13 @@ class UserController extends Controller
                     'incomeTotal' => $machine->pivot->incomeTotal + $income,
                     'remainingTotal' => $newRemainingTotal,
                 ]);
+
+                Record::create([
+                    'name' => 'Renda Diária',
+                    'money' => $income,
+                    'user_id' => $user->id,
+                ]);
+
             } else {
                 // Remover a relação se remainingTotal chegar a 0
                 $user->machines()->detach($machine->id);
