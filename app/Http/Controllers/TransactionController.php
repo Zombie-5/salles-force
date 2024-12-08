@@ -57,6 +57,10 @@ class TransactionController extends Controller
             return redirect()->back()->with('error', 'A transação já foi concluída e não pode ser alterada.');
         }
 
+        if ($transaction->status == 'rejeitado') {
+            return redirect()->back()->with('error', 'A transação já foi rejeitada e não pode ser alterada.');
+        }
+
         // Se o status for "concluído"
         if ($validated['status'] == 'concluido') {
             try {
@@ -83,6 +87,37 @@ class TransactionController extends Controller
                     $transaction->save();
                     DB::commit(); // Confirma a transação sem alterar nada
                     return redirect()->back()->with('info', 'Transação de retirada concluída, mas sem alterações no saldo.');
+                }
+            } catch (\Exception $e) {
+                DB::rollBack(); // Desfaz qualquer mudança no banco se ocorrer um erro
+                return redirect()->back()->with('error', 'Erro ao concluir a transação: ' . $e->getMessage());
+            }
+        }
+
+        // Se o status for "rejeitado"
+        if ($validated['status'] == 'rejeitado') {
+            try {
+                DB::beginTransaction(); // Inicia uma transação no banco de dados
+
+                // Verifica a ação da transação
+                if ($transaction->action == 'depositar') {
+                    // Atualiza o status da transação
+                    $transaction->status = 'rejeitado';
+                    $transaction->save();
+
+                    DB::commit(); // Confirma a transação no banco de dados
+
+                    return redirect()->back()->with('success', 'Depósito rejeitado com sucesso.');
+                } elseif ($transaction->action == 'retirar') {
+
+                    $user = User::findOrFail($transaction->userId);
+                    $user->money += $transaction->money; // Adiciona o valor ao saldo do usuário
+                    $user->save();
+
+                    $transaction->status = 'rejeitado';
+                    $transaction->save();
+                    DB::commit(); // Confirma a transação sem alterar nada
+                    return redirect()->back()->with('info', 'Transação de retirada rejeitada, saldo reajustado.');
                 }
             } catch (\Exception $e) {
                 DB::rollBack(); // Desfaz qualquer mudança no banco se ocorrer um erro
@@ -161,7 +196,7 @@ class TransactionController extends Controller
             if($depositAmount > $user->money ){
                 return redirect()->back()->with('error', 'Saldo insuficiente');
             }
-           
+
             // Lógica de retirada
             $transaction = Transaction::create([
                 'action' => 'retirar',
