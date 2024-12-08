@@ -1273,3 +1273,17 @@ select option {
     justify-content: space-around;
     flex-direction: column;
 }
+
+.desc {
+    width: 90%; /* Ocupe 90% da largura da tela */
+    height: 90px;
+    padding: 10px 5px; /* Maior área de toque */
+    margin: 15px 0;
+    box-sizing: border-box;
+    border-radius: 10px;
+    background-color: transparent;
+    color: black;
+    border: solid 1px #333;
+    font-size: 4vw; /* Tamanho de fonte mais confortável */
+    transition: all 0.3s ease;
+}

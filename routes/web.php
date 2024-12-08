@@ -93,6 +93,10 @@ Route::middleware('autenticacao')->prefix('/master')->group(function () {
     Route::get('/gift-generate', 'GiftCodeController@create')->name('gift.generate.view');
     Route::get('/gift-index', 'GiftCodeController@index')->name('gift.index');
 
+    Route::post('/store-notice', 'NoticeController@store')->name('notice.store');
+    Route::get('/create-notice', 'NoticeController@create')->name('notice.create');
+    Route::get('/notice-index', 'NoticeController@index')->name('notice.index');
+
 
     Route::get('/sair', 'AdminController@sair')->name('admin.sair');
 });
