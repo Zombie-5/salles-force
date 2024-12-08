@@ -123,10 +123,9 @@ p, span {
 /* ======== Cartões ======== */
 .myCard-vip {
     background-color: white; /* Fundo branco */
-    width: 90%; /* Largura padrão em dispositivos móveis */
+    width: 100%; /* Largura padrão em dispositivos móveis */
     max-width: 400px; /* Limita para telas maiores */
     border-radius: 10px; /* Cantos arredondados */
-    margin: 10px 0;
     padding: 15px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
     display: flex;
@@ -135,7 +134,7 @@ p, span {
 }
 
 .myCard-vip-info {
-    width: 90%;
+    width: 100%;
     display: flex;
     align-items: start;
     justify-content: start;
@@ -879,7 +878,7 @@ h1 {
 
 .ajust{
     margin: 10px 0px;
-    width: 77%; /* Ocupe 90% da largura da tela */
+    width: 90%; /* Ocupe 90% da largura da tela */
     height: 30px;
     padding: 0px 20px;
     display: flex;
@@ -995,7 +994,7 @@ h1 {
 
     padding: 10px 0px;
     width: 100%; /* Ocupe 90% da largura da tela */
-    height: 30px;
+    height: 50px;
 
 
     border: none;
