@@ -3,8 +3,8 @@
 @section('conteudo')
     <div class="conteudo-pagina">
         @forelse ($machinesData as $data)
-            <div class="card-vip">
-                <div class="card-vip-info">
+            <div class="myCard-vip">
+                <div class="myCard-vip-info">
                     <span class="titulo-static">{{ number_format($data['machine']->price, 2, ',', '.') }} kz</span>
                     <span class="item">{{ $data['machine']->name }}: <span class="suave">{{ $data['machine']->function }}</span></span>
                     <span class="item">Renda diária: <span class="suave">{{ number_format($data['machine']->income, 2, ',', '.') }}
@@ -35,7 +35,7 @@
                 </form>
             </div>
         @empty
-            <div class="card-vip-info">
+            <div class="myCard-vip-info">
                 Nenhuma máquina encontrada.
             </div>
         @endforelse

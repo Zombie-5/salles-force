@@ -28,25 +28,25 @@
         <div class="tab-content">
 
             <div id="n1" class="tab-pane active">
-                <div class="card-vip-info">
+                <div class="myCard-vip-info">
                     Total Convidados N1: {{ $totalNivel1 }}
                 </div>
                 <hr>
                 @forelse ($nivel1 as $guest)
-                    <div class="card-vip-info">
+                    <div class="myCard-vip-info">
                         <span class="item">{{ $guest->telefone }}</span>
                         <span class="suave" style="font-size: 12px; font-weight: 500">{{ $guest->created_at }}</span>
                     </div>
                     <hr>
                 @empty
-                    <div class="card-vip-info">
+                    <div class="myCard-vip-info">
                         Nenhum convidado encontrado.
                     </div>
                 @endforelse
             </div>
 
             <div id="n2" class="tab-pane">
-                <div class="card-vip-info">
+                <div class="myCard-vip-info">
                     Total Convidados N2: {{ $totalNivel2 }}
                 </div>
                 <hr>
@@ -55,14 +55,14 @@
                     <span class="suave" style="font-size: 12px; font-weight: 500">{{ $guest->created_at }}</span>
                     <hr>
                 @empty
-                    <div class="card-vip-info">
+                    <div class="myCard-vip-info">
                         Nenhum convidado encontrado.
                     </div>
                 @endforelse
             </div>
 
             <div id="n3" class="tab-pane">
-                <div class="card-vip-info">
+                <div class="myCard-vip-info">
                     Total Convidados N3: {{ $totalNivel3 }}
                 </div>
                 <hr>
@@ -71,7 +71,7 @@
                     <span class="suave" style="font-size: 12px; font-weight: 500">{{ $guest->created_at }}</span>
                     <hr>
                 @empty
-                    <div class="card-vip-info">
+                    <div class="myCard-vip-info">
                         Nenhum convidado encontrado.
                     </div>
                 @endforelse

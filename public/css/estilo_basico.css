@@ -61,8 +61,8 @@ p, span {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    height: 60px;
-    padding: 10px 0;
+    height: 70px;
+    padding: 20px 0;
     background-color: #ffffff; /* Fundo branco */
     box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); /* Sombra superior */
     position: fixed; /* Fixa no rodapé */
@@ -77,11 +77,12 @@ p, span {
     align-items: center;
     text-decoration: none;
     color: #333;
+    margin: 5px 0px;
 }
 
 .menu-icon {
     width: 30px; /* Tamanho base do ícone */
-    margin-bottom: 5px;
+    margin: 2px 0px;
     transition: transform 0.2s ease, opacity 0.2s ease; /* Animação suave */
 }
 
@@ -120,7 +121,7 @@ p, span {
 
 
 /* ======== Cartões ======== */
-.card-vip {
+.myCard-vip {
     background-color: white; /* Fundo branco */
     width: 90%; /* Largura padrão em dispositivos móveis */
     max-width: 400px; /* Limita para telas maiores */
@@ -133,7 +134,7 @@ p, span {
     align-items: flex-start;
 }
 
-.card-vip-info {
+.myCard-vip-info {
     width: 90%;
     display: flex;
     align-items: start;
@@ -141,13 +142,13 @@ p, span {
     flex-direction: column;
 }
 
-.card-vip-info span {
+.myCard-vip-info span {
     font-size: 14px;
     margin: 5px 0;
     color: #333; /* Texto escuro */
 }
 
-.card-vip button {
+.myCard-vip button {
     margin-top: 10px;
     width: 100%;
     padding: 10px;
@@ -159,14 +160,14 @@ p, span {
     transition: background-color 0.2s ease; /* Animação de hover */
 }
 
-.card-vip button:hover {
+.myCard-vip button:hover {
     background-color: #4bd2ff; /* Tom mais claro de roxo */
 }
 
 /* ======== Cartões ## ======== */
-.card {
+.myCard {
     background-color: white; /* Fundo branco */
-    width: 90%; /* Ocupa toda a largura disponível */
+    width: 100%; /* Ocupa toda a largura disponível */
     max-width: 400px; /* Limite para telas grandes */
     border-radius: 10px; /* Cantos arredondados */
     padding: 20px; /* Espaçamento interno */
@@ -174,7 +175,7 @@ p, span {
     display: flex;
     flex-direction: column;
     gap: 15px; /* Espaçamento entre os elementos internos */
-    margin: 20px 0px;
+    margin: 10px 0px;
 }
 
 /* ======== Informações do Usuário ======== */
@@ -219,7 +220,7 @@ p, span {
     margin: 5px 0px;
 }
 
-.card-vip-info .titulo-static {
+.myCard-vip-info .titulo-static {
     font-size: 20px;
     font-weight: bold;
     color: #00C0FF;
@@ -227,7 +228,7 @@ p, span {
     margin: 5px 0px;
 }
 
-.card-vip-info .titulo{
+.myCard-vip-info .titulo{
     font-size: 15px; /* Tamanho do texto para destaque */
     font-weight: bold; /* Negrito para o nome da plataforma */
     color: black; /* Cor sutil e elegante */
@@ -246,11 +247,11 @@ p, span {
     flex-direction: column;
     align-items: center;
     flex: 1; /* Distribui espaço igualmente */
-    min-width: 100px; /* Largura mínima */
 }
 
 .sup {
-    font-size: 18px; /* Valor em destaque */
+
+    font-size: 18px;
     font-weight: bold;
     color: #333;
 }
@@ -291,7 +292,7 @@ p, span {
     font-size: 14px;
     font-weight: bold;
     text-align: center;
-    width: 90%; /* Botão ocupa toda a largura */
+    width: 100%; /* Botão ocupa toda a largura */
     max-width: 400px; /* Limite em telas grandes */
     transition: background-color 0.3s ease; /* Animação no hover */
 }
@@ -306,21 +307,21 @@ hr {
     border-top: 2px solid #ddd;
 }
 
-.card-vip-info .item{
+.myCard-vip-info .item{
     font-size: 14px; /* Tamanho do texto para destaque */
     font-weight: bold; /* Negrito para o nome da plataforma */
     color: black; /* Cor sutil e elegante */
     letter-spacing: 1px; /* Espaçamento entre letras */
 }
 
-.card-vip-info .suave{
+.myCard-vip-info .suave{
     font-size: 14px; /* Tamanho do texto para destaque */
     font-weight: bold; /* Negrito para o nome da plataforma */
     color: #4A4A4A; /* Cor sutil e elegante */
     letter-spacing: 1px; /* Espaçamento entre letras */
 }
 
-.card-vip-info .item-tempo{
+.myCard-vip-info .item-tempo{
     font-size: 20px; /* Tamanho do texto para destaque */
     font-weight: bold; /* Negrito para o nome da plataforma */
     color: #4A4A4A; /* Cor sutil e elegante */
@@ -354,16 +355,16 @@ hr {
         font-size: 10px;
     }
 
-    .card-vip {
+    .myCard-vip {
         width: 95%; /* Maior largura */
         margin: 8px 0;
     }
 
-    .card-vip-info span {
+    .myCard-vip-info span {
         font-size: 12px;
     }
 
-    .card-vip button {
+    .myCard-vip button {
         padding: 8px;
         font-size: 14px;
     }
@@ -390,7 +391,7 @@ hr {
         font-size: 1.5rem;
     }
 
-    .card-config {
+    .myCard-config {
         padding: 0.75rem;
     }
 
@@ -400,7 +401,7 @@ hr {
         margin-right: 0.75rem;
     }
 
-    .card-config span {
+    .myCard-config span {
         font-size: 0.9rem;
     }
 
@@ -426,16 +427,16 @@ hr {
         font-size: 9px;
     }
 
-    .card-vip-info span {
+    .myCard-vip-info span {
         font-size: 10px; /* Texto menor */
     }
 
-    .card-vip button {
+    .myCard-vip button {
         font-size: 12px;
         padding: 6px; /* Botão mais compacto */
     }
 
-    .card {
+    .myCard {
         padding: 15px; /* Reduz o espaçamento interno */
     }
 
@@ -494,26 +495,26 @@ hr {
     border-radius: 0.5rem;
 }
 
-.carousel {
+.carrousel {
     width: 100%;
     height: 100%;
     position: relative;
 }
 
-.carousel-inner {
+.carrousel-inner {
     display: flex;
     width: 300%; /* 100% * number of images */
     height: 100%;
-    animation: carousel 15s infinite; /* Adjust time as needed */
+    animation: carrousel 15s infinite; /* Adjust time as needed */
 }
 
-.carousel-inner img {
+.carrousel-inner img {
     width: 33.333%; /* 100% / number of images */
     height: 100%;
     object-fit: cover;
 }
 
-@keyframes carousel {
+@keyframes carrousel {
     0%, 33.33% {
         transform: translateX(0);
     }
@@ -526,7 +527,7 @@ hr {
 }
 
 /* Pause animation on hover for accessibility */
-.carousel:hover .carousel-inner {
+.carrousel:hover .carrousel-inner {
     animation-play-state: paused;
 }
 
@@ -542,7 +543,7 @@ hr {
     margin-bottom: 0.5rem;
 }
 
-.news-card {
+.news-myCard {
     background: white;
     padding: 0.75rem;
     border-radius: 0.5rem;
@@ -560,7 +561,7 @@ hr {
     margin-top: 0.5rem;
 }
 
-.menu-card {
+.menu-myCard {
     background: white;
     padding: 1rem;
     border-radius: 0.5rem;
@@ -727,7 +728,7 @@ h1 {
 
 }
 
-.stat-card {
+.stat-myCard {
     background-color: #fff;
     border-radius: 8px;
     padding: 20px;
@@ -735,13 +736,13 @@ h1 {
     text-align: center;
 }
 
-.stat-card h2 {
+.stat-myCard h2 {
     font-size: 16px;
     color: #666;
     margin-bottom: 10px;
 }
 
-.stat-card p {
+.stat-myCard p {
     font-size: 24px;
     font-weight: bold;
     color: #333;
@@ -778,7 +779,7 @@ h1 {
     margin-bottom: 2rem;
 }
 
-.card-config {
+.myCard-config {
     display: flex;
     padding: 1rem;
     background-color: #fff;
@@ -789,7 +790,7 @@ h1 {
     color: #333;
 }
 
-.card-config:hover {
+.myCard-config:hover {
     background-color: #f3f4f6;
 }
 
@@ -800,7 +801,7 @@ h1 {
     color: #3b82f6;
 }
 
-.card-config span {
+.myCard-config span {
     font-size: 1rem;
     font-weight: 500;
 }
@@ -895,7 +896,7 @@ h1 {
 
 /*  */
 
-.balance-card {
+.balance-myCard {
     background-color: transparent;
     color: #333;
     font-weight: bold;
@@ -1137,6 +1138,7 @@ select option {
 .trans{
     flex-direction: row;
     justify-content: space-between;
+    width: 100%;
     align-items: center;
     padding: 5px 10px;
 }

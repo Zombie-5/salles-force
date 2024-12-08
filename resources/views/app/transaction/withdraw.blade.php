@@ -5,7 +5,7 @@
         <form action="{{ route('transaction.store') }}" method="POST" class="recharge-section">
             @csrf
             <h1>Retirar</h1>
-            <div class="balance-card">
+            <div class="balance-myCard">
                 <div class="balance-label">Saldo da conta</div>
                 <div class="balance-amount">{{ number_format($user->money ?? 0, 2, ',', '.') }} Kz</div>
             </div>

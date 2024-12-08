@@ -3,7 +3,7 @@
 @section('conteudo')
     <div class="conteudo-pagina">
         <div class="grid-links">
-            <section class="card-links">
+            <section class="myCard-links">
                 <h2 class="subtitulo-pagina">Grupos de Comunidade</h2>
                 <ul class="lista-links">
                     <li>
@@ -30,7 +30,7 @@
                 </ul>
             </section>
 
-            <section class="card-links">
+            <section class="myCard-links">
                 <h2 class="subtitulo-pagina">Fale com um Assistente</h2>
                 <ul class="lista-links">
                     <li>
@@ -66,7 +66,7 @@
             gap: 1rem;
         }
 
-        .card-links {
+        .myCard-links {
             background-color: #fff;
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);

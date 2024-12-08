@@ -2,7 +2,7 @@
 
 @section('conteudo')
     <div class="conteudo-pagina">
-        <div class="card">
+        <div class="myCard">
             <div class="user-info">
                 <img src="{{ asset('img/logo.jpg') }}" alt="Home">
                 <div>
@@ -30,7 +30,7 @@
                 </div>
             </div>
         </div>
-        <div class="card">
+        <div class="myCard">
             <div class="user-money">
                 <a href="{{ route('app.deposit') }}" class="menu-item">
                     <img src="{{ asset('img/withdraw.png') }}" alt="Home" class="menu-icon-2">
