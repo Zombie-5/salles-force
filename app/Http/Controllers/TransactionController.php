@@ -128,7 +128,6 @@ class TransactionController extends Controller
 
         // Recuperando a ação (depositar ou retirar)
         $action = $request->input('action');
-        $depositAmount = $request->input('query') ?: $request->input('custom_amount');
         $bancoId = null;  // Atribua o banco se necessário
 
         // Verifica a ação
@@ -138,6 +137,9 @@ class TransactionController extends Controller
             $request->validate([
                 'query' => 'required|numeric|min:10000',
             ]);
+
+            $depositAmount = $request->input('query') ?: $request->input('custom_amount');
+
             // Lógica de depósito
             Transaction::create([
                 'action' => 'depositar',
@@ -154,10 +156,12 @@ class TransactionController extends Controller
                 'query' => 'required|numeric|min:3000',
             ]);
 
-            if($depositAmount > $user->id ){
+            $depositAmount = $request->input('query');
+
+            if($depositAmount > $user->money ){
                 return redirect()->back()->with('error', 'Saldo insuficiente');
             }
-
+           
             // Lógica de retirada
             $transaction = Transaction::create([
                 'action' => 'retirar',
