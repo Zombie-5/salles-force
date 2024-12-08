@@ -6,6 +6,7 @@ use App\Machine;
 use App\Transaction;
 use App\Record;
 use App\User;
+use App\MachineUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -60,7 +61,19 @@ class AppController extends Controller
     public function machine()
     {
         $machines = Machine::all();
-        return view('app.machine', ['machines' => $machines]);
+
+        $machinesData = $machines->map(function ($machine) {
+
+            $relation = MachineUser::where('user_id', Auth::user()->id)->where('machine_id', $machine->id)->get();
+            $isRent = $relation ? true : false;
+
+            return [
+                'machine' => $machine,
+                'isRent' => $isRent
+            ];
+        });
+
+        return view('app.machine', ['machinesData' => $machinesData]);
     }
 
     public function gift()

@@ -247,7 +247,6 @@ class UserController extends Controller
 
         $machinesData = $machines->map(function ($machine) {
             $pivot = $machine->pivot;
-
             return [
                 'machine' => $machine,
                 'remainingTotal' => $pivot->remainingTotal,

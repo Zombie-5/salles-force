@@ -8,7 +8,7 @@ class MachineUser extends Model
 {
     public $timestamps = true;
     protected $table = 'machine_user';
-    
+
     protected $fillable = [
         'user_id',
         'machine_id',
