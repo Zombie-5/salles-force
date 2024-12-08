@@ -10,10 +10,7 @@ body {
 }
 
 /* Estilo de inputs, selects, textareas e botões */
-input,
-select,
-textarea,
-button {
+.padrao {
     width: 90%; /* Ocupe 90% da largura da tela */
     height: 90px;
     padding: 0px 20px; /* Maior área de toque */
@@ -34,7 +31,7 @@ button {
 }
 
 /* Estilo do botão */
-button {
+.padbtn {
     background-color: #00C0FF;
     cursor: pointer;
     color: #fff;
@@ -42,12 +39,12 @@ button {
 }
 
 /* Efeito hover no botão */
-button:hover {
+.padbtn:hover {
     background-color: #00C0FF;
 }
 
 /* Título principal (h1) */
-h1 {
+.titulo {
     color: #00C0FF;
     font-size: 6vw; /* Responsivo */
     text-align: center;
