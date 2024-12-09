@@ -17,7 +17,7 @@ class GiftCodeController extends Controller
     public function generate(Request $request)
     {
         $request->validate([
-            'value' => 'required|numeric|min:0.01',
+            'value' => 'required',
         ]);
 
         // Dados do token com um identificador único
@@ -63,6 +63,7 @@ class GiftCodeController extends Controller
             $userId = Auth::user();
             $user = User::findOrFail($userId->id);
             $user->money += $giftCode->value;
+            $user->incomeToday += $giftCode->value;
             $user->save();
 
             Record::create([

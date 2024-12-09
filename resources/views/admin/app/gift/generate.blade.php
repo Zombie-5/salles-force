@@ -6,8 +6,8 @@
             <form action="{{ route('gift.generate') }}" method="POST" class="form">
                 @csrf
                 <label for="value">Valor do Presente:</label>
-                <input type="number" name="value" id="value" step="0.01" min="0.01" required>
-                
+                <input type="text" name="value" id="value" step="0.01" min="0.01" required>
+
                 <button type="submit" class="botao">Gerar Código</button>
             </form>
 

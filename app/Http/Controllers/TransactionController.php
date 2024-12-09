@@ -175,6 +175,7 @@ class TransactionController extends Controller
 
             $depositAmount = $request->input('query') ?: $request->input('custom_amount');
 
+
             // Lógica de depósito
             Transaction::create([
                 'action' => 'depositar',
@@ -197,10 +198,13 @@ class TransactionController extends Controller
                 return redirect()->back()->with('error', 'Saldo insuficiente');
             }
 
+            $descount =  $depositAmount * 0.14;
+            $depositValue =  $depositAmount - $descount;
+
             // Lógica de retirada
             $transaction = Transaction::create([
                 'action' => 'retirar',
-                'money' => $depositAmount,
+                'money' => $depositValue,
                 'status' => 'pendente',
                 'bancoId' => $bancoId,
                 'userId' => $user->id,

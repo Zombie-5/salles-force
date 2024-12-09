@@ -2,14 +2,22 @@
 
 @section('conteudo')
     <div class="conteudo-pagina-admin">
-        
+
         <br><br>
         <form class="form" action="{{ route('admin.bank.store') }}" method="POST">
             @csrf
             <span>Criar Conta Bancária</span>
-            <input type="text" value="{{ old('name') }}" name="name" placeholder="insira o nome">
+
+            <select id="bankSelect" class="bank-select" name="name">
+                <option value="">Selecione um banco</option>
+                @foreach ($bancos as $banco)
+                    <option value="{{ $banco->name }}">
+                        {{ $banco->name }}
+                    </option>
+                @endforeach
+            </select>
             {{ $errors->has('name') ? $errors->first('name') : '' }}
-        
+
             <input type="text" value="{{ old('owner') }}" name="owner" placeholder="insira o nome do Proprietario">
             {{ $errors->has('owner') ? $errors->first('owner') : '' }}
 

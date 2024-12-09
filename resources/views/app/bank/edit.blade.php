@@ -8,7 +8,15 @@
             @method('PUT')
 
             <span>Editar Conta Bancária</span>
-            <input type="text" value="{{ $banco->name ?? old('name') }}" name="name" placeholder="insira o nome">
+            
+            <select id="bankSelect" class="bank-select" name="name">
+                <option value="">Selecione um banco</option>
+                @foreach ($bancos as $banco)
+                    <option value="{{ $banco->name }}">
+                        {{ $banco->name }}
+                    </option>
+                @endforeach
+            </select>
             {{ $errors->has('name') ? $errors->first('name') : '' }}
 
             <input type="text" value="{{ $banco->owner ?? old('owner') }}" name="owner" placeholder="insira o nome do Proprietario">

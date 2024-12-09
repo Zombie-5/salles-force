@@ -21,11 +21,11 @@
 
 
             <div class="instructions">
-                <p>O valor mínimo do depósito é de 10.000KZ (horário de carregamento: 9h00 às 21h00)</p>
-                <p>Processo de recarga:</p>
-                <p>1.º Selecione o mesmo banco para transferir fundos. Os fundos chegarão à conta em 10 minutos. Se não
-                    utilizar o mesmo banco para transferência, os fundos não chegarão à sua conta a tempo.</p>
-                <p>2. Copie o nome do banco, o nome, o número da conta e o valor.</p>
+                <h5 style="color: black">Regras de Retirada</h5>
+                <p>1. Saque mínimo: 1.200 KZ.</p>
+                <p>2. Taxa de retirada: 14%.</p>
+                <p>3. Horário para solicitação de saque: das 9h às 14h, de segunda a sexta-feira.</p>
+                <p>4. Após a solicitação de saque, os fundos serão transferidos para a conta em até 72 horas úteis. Caso o prazo de 72 horas seja excedido, entre em contato com o apoio ao cliente.</p>
             </div>
         </form>
     </div>

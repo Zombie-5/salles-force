@@ -27,6 +27,7 @@ class BancoController extends Controller
      */
     public function create()
     {
+        // Filtra os bancos onde o campo 'isAdmin' é true
         return view('admin.app.bank.add');
     }
 
@@ -49,7 +50,7 @@ class BancoController extends Controller
             'numeric' => 'O campo :attribute precisa receber um número',
             'unique' => 'O :attribute já pertence a um usuario',
         ];
-        
+
         $request->validate($regras, $feedback);
         $banco = Banco::create($request->all());
 

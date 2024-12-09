@@ -61,7 +61,7 @@ class UserController extends Controller
         ]);
 
         // Descriptografar o convite (ID do usuário)
-        $decodedId = base64_decode($validatedData['convite']);
+        $decodedId = $validatedData['convite'];
 
         // Verificar se o ID é válido
         if (!is_numeric($decodedId) || !User::find($decodedId)) {
@@ -82,6 +82,12 @@ class UserController extends Controller
             $inviter->incomeToday += 100;
             $inviter->incomeTotal += 100;
             $inviter->save();
+
+            Record::create([
+                'name' => 'Bônus Convite',
+                'money' => '100',
+                'user_id' => $inviter->id,
+            ]);
         }
 
         return redirect()->route('site.login')->with('success', 'Usuário criado com sucesso!');

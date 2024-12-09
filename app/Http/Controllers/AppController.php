@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Machine;
 use App\Transaction;
 use App\Record;
+use App\Banco;
 use App\User;
 use App\MachineUser;
 use Illuminate\Http\Request;
@@ -16,7 +17,8 @@ class AppController extends Controller
     {
         // Obter o usuário autenticado
         $baseURL = 'https://salles-force.onrender.com/cadastrar';
-        $encodeId = base64_encode(Auth::user()->id);
+        //$baseURL = 'http://127.0.0.1:8000/cadastrar';
+        $encodeId = Auth::user()->id;
         return $baseURL . '/' . $encodeId;
     }
 
@@ -65,7 +67,7 @@ class AppController extends Controller
         $machinesData = $machines->map(function ($machine) {
 
             $relation = MachineUser::where('user_id', Auth::user()->id)->where('machine_id', $machine->id)->get();
-            $isRent = $relation ? true : false;
+            $isRent = $relation ? false : false;
 
             return [
                 'machine' => $machine,
@@ -90,14 +92,20 @@ class AppController extends Controller
 
     public function addBank()
     {
-        return view('app.bank.add');
+        $bancos = Banco::orderBy('id', 'desc')
+        ->where('isAdmin', true)
+            ->get();
+        return view('app.bank.add', compact('bancos'));
     }
 
     public function editBank()
     {
         $user = Auth::user();
         $banco = $user->banco;
-        return view('app.bank.edit', compact('banco'));
+        $bancos = Banco::orderBy('id', 'desc')
+        ->where('isAdmin', true)
+            ->get();
+        return view('app.bank.edit', compact('bancos', 'banco'));
     }
 
     public function deposit()

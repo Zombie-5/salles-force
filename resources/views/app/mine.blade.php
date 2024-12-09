@@ -13,7 +13,7 @@
                         </span>
                     </span>
 
-                    <span class="item">Lucro: <span class="suave">{{ $data['incomeTotal'] }}</span></span>
+                    <span class="item">Receita: <span class="suave">{{ $data['incomeTotal'] }}</span></span>
                 </div>
             </div>
         @empty

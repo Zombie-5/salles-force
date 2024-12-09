@@ -6,10 +6,11 @@
         <h1 class="titulo-pagina">Selecione o Banco</h1>
 
         <div class="select-div">
-            <select id="bankSelect" class="bank-select">
+            <select id="bankSelect" class="bank-select bank-info" style="background-color: white">
                 <option value="">Selecione um banco</option>
                 @foreach ($bancos as $banco)
-                    <option value="{{ $banco->id }}" data-name="{{ $banco->owner }}" data-iban="{{ $banco->iban }}" data-money="{{ $money }} ">
+                    <option value="{{ $banco->id }}" data-name="{{ $banco->owner }}" data-iban="{{ $banco->iban }}"
+                        data-money="{{ $money }} ">
                         {{ $banco->name }}
                     </option>
                 @endforeach
@@ -32,7 +33,6 @@
     </div>
 
     <script>
-
         function formatIban(iban) {
             // Remove qualquer caractere que não seja número ou letra
             iban = iban.replace(/[^A-Za-z0-9]/g, '');
