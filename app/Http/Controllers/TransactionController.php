@@ -54,11 +54,11 @@ class TransactionController extends Controller
 
         // Verifique se a transação já está concluída
         if ($transaction->status == 'concluido') {
-            return redirect()->back()->with('error', 'A transação já foi concluída e não pode ser alterada.');
+            return redirect()->back()->withErrors(['A transação já foi concluída e não pode ser alterada.']);
         }
 
         if ($transaction->status == 'rejeitado') {
-            return redirect()->back()->with('error', 'A transação já foi rejeitada e não pode ser alterada.');
+            return redirect()->back()->withErrors(['A transação já foi rejeitada e não pode ser alterada.']);
         }
 
         // Se o status for "concluído"
@@ -86,11 +86,11 @@ class TransactionController extends Controller
                     $transaction->status = 'concluido';
                     $transaction->save();
                     DB::commit(); // Confirma a transação sem alterar nada
-                    return redirect()->back()->with('info', 'Transação de retirada concluída, mas sem alterações no saldo.');
+                    return redirect()->back()->with('success', 'Transação de retirada concluída.');
                 }
             } catch (\Exception $e) {
                 DB::rollBack(); // Desfaz qualquer mudança no banco se ocorrer um erro
-                return redirect()->back()->with('error', 'Erro ao concluir a transação: ' . $e->getMessage());
+                return redirect()->back()->withErrors(['Erro ao concluir a transação']);
             }
         }
 
@@ -117,11 +117,11 @@ class TransactionController extends Controller
                     $transaction->status = 'rejeitado';
                     $transaction->save();
                     DB::commit(); // Confirma a transação sem alterar nada
-                    return redirect()->back()->with('info', 'Transação de retirada rejeitada, saldo reajustado.');
+                    return redirect()->back()->with('success', 'Transação de retirada rejeitada, saldo reajustado.');
                 }
             } catch (\Exception $e) {
                 DB::rollBack(); // Desfaz qualquer mudança no banco se ocorrer um erro
-                return redirect()->back()->with('error', 'Erro ao concluir a transação: ' . $e->getMessage());
+                return redirect()->back()->withErrors(['Erro ao concluir a transação']);
             }
         }
 
@@ -194,8 +194,8 @@ class TransactionController extends Controller
 
             $depositAmount = $request->input('query');
 
-            if($depositAmount > $user->money ){
-                return redirect()->back()->with('error', 'Saldo insuficiente');
+            if ($depositAmount > $user->money) {
+                return redirect()->back()->withErrors(['Saldo insuficiente']);
             }
 
             $descount =  $depositAmount * 0.14;
@@ -217,7 +217,7 @@ class TransactionController extends Controller
         }
 
         // Caso a ação seja inválida
-        return back()->withErrors(['action' => 'Ação inválida']);
+        return back()->withErrors(['Ação inválida']);
     }
 
 

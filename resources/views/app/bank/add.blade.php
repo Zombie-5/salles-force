@@ -16,13 +16,10 @@
                     </option>
                 @endforeach
             </select>
-            {{ $errors->has('name') ? $errors->first('name') : '' }}
 
             <input type="text" value="{{ old('owner') }}" name="owner" placeholder="insira o nome do Proprietario">
-            {{ $errors->has('owner') ? $errors->first('owner') : '' }}
 
             <input type="text" name="iban" value="{{ old('iban') }}" placeholder="insira o Iban">
-            {{ $errors->has('iban') ? $errors->first('iban') : '' }}
 
             <input type="hidden" name="isAdmin" value="0">
             <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">

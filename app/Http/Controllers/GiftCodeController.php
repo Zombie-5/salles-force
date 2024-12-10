@@ -51,12 +51,12 @@ class GiftCodeController extends Controller
             $giftCode = GiftCode::where('token', $request->token)->first();
 
             if (!$giftCode) {
-                return response()->json(['error' => 'Token inválido'], 400);
+                return redirect()->back()->withErrors(['Token inválido']);
             }
 
             // Verifica se o token já foi utilizado
             if ($giftCode->status === 'used') {
-                return response()->json(['error' => 'Token já resgatado'], 400);
+                return redirect()->back()->withErrors(['Token já resgatado']);
             }
 
             // Simula o depósito na conta do usuário (implementação do seu método depositToUserAccount)
@@ -77,7 +77,8 @@ class GiftCodeController extends Controller
 
             return redirect()->back()->with('success', 'presente resgatado com sucesso!');;
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Token inválido');
+            dd($e);
+            return redirect()->back()->withErrors(['Token inválido']);
         }
     }
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Banco;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BancoController extends Controller
 {
@@ -15,7 +16,7 @@ class BancoController extends Controller
     public function index()
     {
         $bancos = Banco::orderBy('id', 'desc')
-        ->where('isAdmin', true)
+            ->where('isAdmin', true)
             ->get();
         return view('admin.app.bank.index', ['bancos' => $bancos]);
     }
@@ -55,10 +56,10 @@ class BancoController extends Controller
         $banco = Banco::create($request->all());
 
         if (isset($banco->user_id)) {
-            return redirect()->route('app.bank');
+            return redirect()->route('app.bank')->withErrors(['Você já tem uma conta bancaria associada']);
         }
 
-        return redirect()->route('admin.bank.index');
+        return redirect()->route('admin.bank.index')->with('success', 'Banco Associado com sucesso!');
     }
 
     /**
@@ -92,27 +93,52 @@ class BancoController extends Controller
      */
     public function update(Request $request, Banco $banco)
     {
+        // Recuperar o usuário atual
+        $userId = Auth::id(); // ID do usuário logado
+
+        // Definir as regras de validação
         $regras = [
             'name' => 'required',
             'owner' => 'required',
-            'iban' => 'required|numeric|unique:bancos,iban,' . $banco->id,
+            'iban' => [
+                'required',
+                'numeric',
+                function ($attribute, $value, $fail) use ($banco, $userId) {
+                    // Verificar se o IBAN está sendo alterado
+                    if ($banco->iban !== $value) {
+                        // Verificar se o IBAN pertence a outro usuário
+                        $ibanExistente = Banco::where('iban', $value)
+                            ->where('user_id', '!=', $userId)
+                            ->first();
+
+                        if ($ibanExistente) {
+                            $fail('O IBAN já pertence a outro usuário');
+                        }
+                    }
+                },
+            ],
         ];
 
+        // Mensagens de feedback
         $feedback = [
             'required' => 'O campo :attribute deve ser preenchido',
             'numeric' => 'O campo :attribute precisa receber um número',
-            'unique' => 'O :attribute já pertence a um usuario',
         ];
 
+        // Validar os dados
         $request->validate($regras, $feedback);
+
+        // Atualizar o banco
         $banco->update($request->all());
 
+        // Redirecionar conforme o caso
         if (isset($banco->user_id)) {
             return redirect()->route('app.bank');
         }
 
-        return redirect()->route('admin.bank.show', $banco->id);
+        return redirect()->route('admin.bank.show', $banco->id)->with('success', 'Banco editado com sucesso!');
     }
+
 
     /**
      * Remove the specified resource from storage.
