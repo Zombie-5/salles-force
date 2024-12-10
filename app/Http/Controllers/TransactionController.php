@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Banco;
 use App\Transaction;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -185,12 +186,33 @@ class TransactionController extends Controller
                 'userId' => $user->id,
             ]);
 
-            return redirect()->route('selecionar.banco')->with('success', 'Depósito solicitado com sucesso!');
+            return redirect()->route('selecionar.banco')->with('success', 'Depósito solicitado com sucesso!')->with('money', $depositAmount);
         } elseif ($action === 'retirar') {
 
             $request->validate([
-                'query' => 'required|numeric|min:3000',
+                'query' => 'required|numeric|min:1200',
+            ], [
+                'query.required' => 'O montante é obrigatório.',
+                'query.numeric' => 'O montante deve ser númerico.',
+                'query.min' => 'O valor mínimo permitido para retirada é 1200 kz',
             ]);
+
+            // Obtém o horário atual
+            $currentTime = Carbon::now();
+
+            // Define o intervalo de horário permitido
+            $startTime = Carbon::createFromTime(9, 0, 0);  // 09:00
+            $endTime = Carbon::createFromTime(14, 0, 0);   // 14:00
+
+            // Verifica se o dia é sábado ou domingo
+            if ($currentTime->isWeekend()) {
+                return back()->withErrors(['A solicitação de saque não pode ser feita durante o fim de semana. O horário é de segunda a sexta-feira.']);
+            }
+
+            // Verifica se o horário atual está fora do intervalo permitido (9h às 14h)
+            if ($currentTime->lt($startTime) || $currentTime->gt($endTime)) {
+                return back()->withErrors(['O horário para solicitação de saque é das 9h às 14h, de segunda a sexta-feira.']);
+            }
 
             $depositAmount = $request->input('query');
 
@@ -228,7 +250,8 @@ class TransactionController extends Controller
 
         // Verifica se há um banco selecionado e o passa para a view
         $selectedBank = null;
-        $money = 20000;
+        $money = $request->session()->get('money');
+
         if ($request->has('banco_id')) {
             $selectedBank = Banco::find($request->input('banco_id'));
         }

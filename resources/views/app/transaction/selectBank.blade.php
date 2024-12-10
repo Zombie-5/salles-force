@@ -9,8 +9,8 @@
             <select id="bankSelect" class="bank-select bank-info" style="background-color: white">
                 <option value="">Selecione um banco</option>
                 @foreach ($bancos as $banco)
-                    <option value="{{ $banco->id }}" data-name="{{ $banco->owner }}" data-iban="{{ $banco->iban }}"
-                        data-money="{{ $money }} ">
+                    <option value="{{ $banco->id }}" data-name="{{ $banco->owner }}" data-iban="{{ $banco->iban }} "
+                        data-money="{{ number_format($money, 2, ',', '.') }} ">
                         {{ $banco->name }}
                     </option>
                 @endforeach
@@ -18,13 +18,13 @@
 
             <div id="bankInfo" class="bank-info">
                 <div>
-                    <span id="bankName">-- Proprietário da Conta --</span>
+                    <span id="bankName" class="copy-text">-- Proprietário da Conta --</span>
                 </div>
                 <div>
-                    <span id="bankIban">Iban</span>
+                    <span id="bankIban" class="copy-text">Iban</span>
                 </div>
                 <div>
-                    <span id="quant">Quantia</span>
+                    <span id="quant">{{ number_format($money, 2, ',', '.') }} </span>
                 </div>
             </div>
 
@@ -67,6 +67,24 @@
                 bankName.textContent = "-- Proprietário da Conta --";
                 bankIban.textContent = "-- Iban --";
             }
+        });
+
+        // Função para copiar para a área de transferência
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert("Texto copiado para a área de transferência!");
+            }).catch(err => {
+                alert("Erro ao copiar o texto: " + err);
+            });
+        }
+
+        // Adiciona o evento de clique nos elementos para copiar o texto
+        bankName.addEventListener('click', function() {
+            copyToClipboard(bankName.textContent);
+        });
+
+        bankIban.addEventListener('click', function() {
+            copyToClipboard(bankIban.textContent);
         });
     </script>
 @endsection
