@@ -16,27 +16,26 @@
                 <tbody>
                     @forelse ($transactions as $transaction)
                         <tr>
-                            <td style="text-align: center">{{ 1852+$transaction->userId }}</td>
+                            <td style="text-align: center">{{ 1852 + $transaction->userId }}</td>
                             <td>{{ $transaction->action }}</td>
                             <td>{{ $transaction->money }}</td>
-                            
+
                             <td>
-                                <form action="{{ route('transaction.status', $transaction->id) }}"
-                                    method="POST">
+                                <!-- Formulário de alteração de status com select -->
+                                <form action="{{ route('transaction.status', $transaction->id) }}" method="POST">
                                     @csrf
                                     @method('PATCH')
-                                    <select name="status" onchange="this.form.submit()" class="select">
+                                    <select name="status" onchange="this.form.submit()"
+                                        class="select @if ($transaction->status == 'pendente') status-pendente @elseif ($transaction->status == 'processando') status-processando @elseif ($transaction->status == 'concluido') status-concluido @elseif ($transaction->status == 'rejeitado') status-rejeitado @endif">
                                         <option value="pendente" {{ $transaction->status == 'pendente' ? 'selected' : '' }}>
                                             Pendente</option>
                                         <option value="processando"
-                                            {{ $transaction->status == 'processando' ? 'selected' : '' }}>
-                                            Processando</option>
+                                            {{ $transaction->status == 'processando' ? 'selected' : '' }}>Processando
+                                        </option>
                                         <option value="concluido"
-                                            {{ $transaction->status == 'concluido' ? 'selected' : '' }}>
-                                            Aprovado</option>
+                                            {{ $transaction->status == 'concluido' ? 'selected' : '' }}>Aprovado</option>
                                         <option value="rejeitado"
-                                            {{ $transaction->status == 'rejeitado' ? 'selected' : '' }}>
-                                            Rejeitado</option>
+                                            {{ $transaction->status == 'rejeitado' ? 'selected' : '' }}>Rejeitado</option>
                                     </select>
                                 </form>
                             </td>

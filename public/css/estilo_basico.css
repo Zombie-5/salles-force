@@ -1502,3 +1502,30 @@ select option {
     color: #333;
     /* Cor do texto */
 }
+
+select.status-pendente {
+    background-color: grey; /* Amarelo para "Pendente" */
+    color: #fff;
+}
+
+.select.status-processando {
+    background-color: #f39c12; /* Amarelo para "Pendente" */
+    color: #fff;
+}
+
+.select.status-concluido {
+    background-color: #2ecc71; /* Verde para "Concluído" */
+    color: #fff;
+}
+
+.select.status-rejeitado {
+    background-color: #e74c3c; /* Vermelho para "Rejeitado" */
+    color: #fff;
+}
+
+/* Personalizando o select */
+.select {
+    border: 1px solid #ccc;
+    padding: 5px;
+    font-size: 14px;
+}
