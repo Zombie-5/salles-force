@@ -17,7 +17,7 @@ class CreateTransactionsTable extends Migration
             $table->id();
             $table->enum('action', ['depositar', 'retirar']);
             $table->float('money');
-            $table->enum('status', ['pendente', 'processando', 'concluido'])->default('pendente');
+            $table->enum('status', ['pendente', 'processando', 'concluido', 'rejeitado'])->default('pendente');
             $table->unsignedBigInteger('bancoId')->nullable();
             $table->timestamps();
 

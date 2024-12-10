@@ -2,12 +2,12 @@
 
 @section('conteudo')
     <div class="conteudo-pagina">
-        <div class="card">
+        <div class="myCard">
             <div class="user-info">
                 <img src="{{ asset('img/logo.jpg') }}" alt="Home">
                 <div>
                     <span class="number">{{$user->telefone}}</span>
-                    <span class="titulo">ID: <span class="titulo-static">{{$user->id}}</span></span>
+                    <span class="titulo">ID: <span class="titulo-static">{{1852+$user->id}}</span></span>
                 </div>
             </div>
             <hr>
@@ -30,7 +30,7 @@
                 </div>
             </div>
         </div>
-        <div class="card">
+        <div class="myCard">
             <div class="user-money">
                 <a href="{{ route('app.deposit') }}" class="menu-item">
                     <img src="{{ asset('img/withdraw.png') }}" alt="Home" class="menu-icon-2">

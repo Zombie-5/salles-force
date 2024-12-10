@@ -16,9 +16,10 @@
                 <tbody>
                     @forelse ($transactions as $transaction)
                         <tr>
-                            <td style="text-align: center">{{ $transaction->userId }}</td>
+                            <td style="text-align: center">{{ 1852+$transaction->userId }}</td>
                             <td>{{ $transaction->action }}</td>
                             <td>{{ $transaction->money }}</td>
+                            
                             <td>
                                 <form action="{{ route('transaction.status', $transaction->id) }}"
                                     method="POST">

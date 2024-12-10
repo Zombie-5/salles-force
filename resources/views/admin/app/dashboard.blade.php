@@ -3,7 +3,7 @@
 @section('conteudo')
     <div class="conteudo-pagina-dashboard">
         <div class="stats-grid">
-            <div class="stat-card">
+            <div class="stat-myCard">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="icon">
                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -12,7 +12,7 @@
                 <h2>Total de Usuários</h2>
                 <p>{{ $totalUsers }}</p>
             </div>
-            <div class="stat-card">
+            <div class="stat-myCard">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="icon">
                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -21,7 +21,7 @@
                 <h2>Total de Mineiros</h2>
                 <p>{{ $activeUsers }}</p>
             </div>
-            <div class="stat-card">
+            <div class="stat-myCard">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="icon">
                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -30,7 +30,7 @@
                 <h2>Total Depositado</h2>
                 <p>{{ number_format($totalDeposited, 2, ',', '.') }} Kz</p>
             </div>
-            <div class="stat-card">
+            <div class="stat-myCard">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="icon">
                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -39,7 +39,7 @@
                 <h2>Total Retirado</h2>
                 <p>{{ number_format($totalWithdrawn, 2, ',', '.') }} Kz</p>
             </div>
-            <div class="stat-card">
+            <div class="stat-myCard">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="icon">
                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -49,7 +49,7 @@
                 <p>{{ $totalMachines }}</p>
             </div>
 
-            <div class="stat-card">
+            <div class="stat-myCard">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="icon">
                     <path stroke-linecap="round" stroke-linejoin="round"

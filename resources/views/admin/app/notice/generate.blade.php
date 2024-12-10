@@ -2,13 +2,13 @@
 
 @section('conteudo')
     <div class="conteudo-pagina-admin">
-        <h1 class="titulo-pagina">Gerar Código de Presente</h1>
-            <form action="{{ route('gift.generate') }}" method="POST" class="form">
+        <h1 class="titulo-pagina">Criar nova noticia</h1>
+            <form action="{{ route('notice.store') }}" method="POST" class="form">
                 @csrf
-                <label for="value">Valor do Presente:</label>
-                <input type="text" name="value" id="value" step="0.01" min="0.01" required>
+                <label for="value">Noticia:</label>
+                <textarea name="value" id="value" require cols="40" rows="10" class="desc"></textarea>
 
-                <button type="submit" class="botao">Gerar Código</button>
+                <button type="submit" class="botao">Salvar</button>
             </form>
 
             @if (session('token'))

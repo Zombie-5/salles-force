@@ -5,7 +5,7 @@
         <form action="{{ route('transaction.store') }}" method="post" class="recharge-section" id="deposit-form">
             @csrf
             <h1>Recarregar</h1>
-            <div class="balance-card">
+            <div class="balance-myCard">
                 <div class="balance-label">Saldo da conta</div>
                 <div class="balance-amount">{{ number_format($user->money ?? 0, 2, ',', '.') }} Kz</div>
             </div>
@@ -13,27 +13,32 @@
             <input type="hidden" name="query" id="deposit-amount">
             <input type="hidden" name="action" id="form-action" value="depositar">
             <input type="text" name="custom_amount" id="custom-amount" placeholder="Insira a quantia em kwanzas">
- 
+
+            <div class="news-header">
+                <h2></h2>
+                <a href="{{ route('app.records.deposit') }}" class="more-link">Registros de Recargas</a>
+            </div>
+
             <div class="amount-grid">
-                <button type="button" class="amount-btn" data-value="9000">9000</button>
                 <button type="button" class="amount-btn" data-value="10000">10000</button>
                 <button type="button" class="amount-btn" data-value="20000">20000</button>
-                <button type="button" class="amount-btn" data-value="40000">40000</button>
-                <button type="button" class="amount-btn" data-value="60000">60000</button>
-                <button type="button" class="amount-btn" data-value="100000">100000</button>
+                <button type="button" class="amount-btn" data-value="55000">55000</button>
                 <button type="button" class="amount-btn" data-value="150000">150000</button>
-                <button type="button" class="amount-btn" data-value="300000">300000</button>
+                <button type="button" class="amount-btn" data-value="250000">25000</button>
+                <button type="button" class="amount-btn" data-value="350000">350000</button>
+                <button type="button" class="amount-btn" data-value="700000">700000</button>
+                <button type="button" class="amount-btn" data-value="1000000">1000000</button>
             </div>
 
             <button type="submit" class="submit-btn">Enviar</button>
 
             <div class="instructions">
-                <p>O valor mínimo do depósito é de 10.000KZ (horário de carregamento: 9h00 às 21h00)</p>
-                <p>Processo de recarga:</p>
+                <h5 style="color: black">Regras de recarga</h5>
+                <p>O valor mínimo do depósito é de 10.000KZ </p>
                 <p>1.º Selecione o mesmo banco para transferir fundos. Os fundos chegarão à conta em 10 minutos. Se não
                     utilizar o mesmo banco para transferência, os fundos não chegarão à sua conta a tempo.</p>
-                <p>2. Copie o nome do banco, o nome, o número da conta e o valor.</p>
-                <p>3. O valor da transferência deve ser consistente</p>
+                <p>2. Copie o nome do banco, o nome do beneficiário, o número da conta e o valor.</p>
+                <p>3. O valor da transferência deve ser consistente ao valor solicitado</p>
             </div>
         </form>
     </div>
@@ -44,6 +49,21 @@
             const depositAmountInput = document.getElementById('deposit-amount');
             const customAmountInput = document.getElementById('custom-amount');
             let isAmountSelected = false;
+
+            if (customAmountInput.value === '') {
+                amountButtons.forEach(button => {
+                    button.addEventListener('click', () => {
+                        // Remove a classe 'selected' de todos os botões
+                        amountButtons.forEach(btn => btn.classList.remove('selected'));
+
+                        // Define o valor no input oculto
+                        depositAmountInput.value = '';
+
+                        // Marca que um valor foi selecionado
+                        isAmountSelected = false;
+                    });
+                });
+            }
 
             // Adiciona evento aos botões de valor predefinido
             amountButtons.forEach(button => {
@@ -58,7 +78,7 @@
                     depositAmountInput.value = button.getAttribute('data-value');
 
                     // Limpa o campo de entrada personalizada
-                    customAmountInput.value = '';
+                    customAmountInput.value = button.getAttribute('data-value');
 
                     // Marca que um valor foi selecionado
                     isAmountSelected = true;

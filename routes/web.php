@@ -31,7 +31,7 @@ Route::middleware('autenticacao')->prefix('/app')->group(function () {
     Route::post('/alugar-maquina/{machineId}', 'UserController@alugarMaquina')->name('user.alugar');
 
     Route::get('/profile', 'AppController@profile')->name('app.profile');
-    
+
     Route::get('/team', 'AppController@team')->name('app.team');
     Route::get('/about-us', 'AppController@about')->name('app.about');
     Route::get('/presentes', 'AppController@gift')->name('app.gift');
@@ -41,13 +41,19 @@ Route::middleware('autenticacao')->prefix('/app')->group(function () {
     Route::get('/bank-edit', 'AppController@editBank')->name('app.bank.edit');
 
     Route::get('/deposit', 'AppController@deposit')->name('app.deposit');
-    Route::get('/records', 'AppController@records')->name('app.records');
+    Route::get('/select-bank-account', 'TransactionController@selecionarBanco')->name('selecionar.banco');
+
     Route::get('/withdraw', 'AppController@withdraw')->name('app.withdraw');
+
+    Route::get('/records', 'AppController@records')->name('app.records');
+    Route::get('/records-withdraw', 'TransactionController@indexDeposit')->name('app.records.deposit');
+    Route::get('/records-deposit', 'TransactionController@indexWithdraw')->name('app.records.withdraw');
+
     Route::get('/custumer-care', 'AppController@custumerCare')->name('app.custumerCare');
 
-    
+
     Route::post('/redeem', 'GiftCodeController@redeem')->name('gift.redeem');
-    
+
     Route::get('/sair', 'AuthController@sair')->name('app.sair');
 });
 
@@ -66,7 +72,6 @@ Route::middleware('autenticacao')->prefix('/master')->group(function () {
     Route::get('/transaction', 'TransactionController@index')->name('transaction.index');
     Route::patch('/transactions/{id}', 'TransactionController@updateStatus')->name('transaction.status');
     Route::post('/transaction/user', 'TransactionController@store')->name('transaction.store');
-    Route::get('/select-bank-account', 'TransactionController@selecionarBanco')->name('selecionar.banco');
 
     Route::get('/machine-list', 'MachineController@index')->name('admin.machine.index');
     Route::get('/machine-show/{machine}', 'MachineController@show')->name('admin.machine.show');
@@ -88,6 +93,10 @@ Route::middleware('autenticacao')->prefix('/master')->group(function () {
     Route::get('/gift-generate', 'GiftCodeController@create')->name('gift.generate.view');
     Route::get('/gift-index', 'GiftCodeController@index')->name('gift.index');
 
-    
+    Route::post('/store-notice', 'NoticeController@store')->name('notice.store');
+    Route::get('/create-notice', 'NoticeController@create')->name('notice.create');
+    Route::get('/notice-index', 'NoticeController@index')->name('notice.index');
+
+
     Route::get('/sair', 'AdminController@sair')->name('admin.sair');
 });

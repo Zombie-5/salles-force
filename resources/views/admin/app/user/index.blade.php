@@ -21,7 +21,7 @@
                 <tbody>
                     @forelse ($users as $user)
                         <tr>
-                            <td>{{ $user->id }}</td>
+                            <td>{{ 1852+$user->id }}</td>
                             <td>{{ $user->telefone }}</td>
                             <td>{{number_format($user->money, 2, ',', '.') }} Kz</td>
                             <th>

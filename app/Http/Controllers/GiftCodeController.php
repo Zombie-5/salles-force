@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\GiftCode;
 use App\User;
+use App\Record;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
@@ -16,7 +17,7 @@ class GiftCodeController extends Controller
     public function generate(Request $request)
     {
         $request->validate([
-            'value' => 'required|numeric|min:0.01',
+            'value' => 'required',
         ]);
 
         // Dados do token com um identificador único
@@ -62,8 +63,14 @@ class GiftCodeController extends Controller
             $userId = Auth::user();
             $user = User::findOrFail($userId->id);
             $user->money += $giftCode->value;
+            $user->incomeToday += $giftCode->value;
             $user->save();
-            
+
+            Record::create([
+                'name' => 'Bônus Presente',
+                'money' => $giftCode->value,
+                'user_id' => $user->id,
+            ]);
 
             // Marca o token como usado no banco de dados
             $giftCode->update(['status' => 'used']);

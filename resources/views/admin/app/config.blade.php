@@ -5,7 +5,7 @@
         <h1 class="titulo-pagina">Configurações</h1>
 
         <div class="grid-configuracoes">
-            <a href="{{ route('admin.machine.index')}}" class="card-config">
+            <a href="{{ route('admin.machine.index')}}" class="myCard-config">
                 <svg xmlns="http://www.w3.org/2000/svg" class="icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
@@ -13,7 +13,7 @@
                 <span>Máquinas</span>
             </a>
 
-            <a href="{{ route('admin.bank.index')}}" class="card-config">
+            <a href="{{ route('admin.bank.index')}}" class="myCard-config">
                 <svg xmlns="http://www.w3.org/2000/svg" class="icon" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -22,7 +22,7 @@
                 <span>Contas Bancárias</span>
             </a>
 
-            <a href="#" class="card-config">
+            <a href="#" class="myCard-config">
                 <svg xmlns="http://www.w3.org/2000/svg" class="icon" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -31,7 +31,7 @@
                 <span>Criar Notícias</span>
             </a>
 
-            <a href="{{ route('gift.index') }}" class="card-config">
+            <a href="{{ route('gift.index') }}" class="myCard-config">
                 <svg xmlns="http://www.w3.org/2000/svg" class="icon" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

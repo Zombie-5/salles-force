@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Machine;
 use App\Transaction;
+use App\Record;
+use App\Banco;
 use App\User;
+use App\MachineUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -14,7 +17,8 @@ class AppController extends Controller
     {
         // Obter o usuário autenticado
         $baseURL = 'https://salles-force.onrender.com/cadastrar';
-        $encodeId = base64_encode(Auth::user()->id);
+        //$baseURL = 'http://127.0.0.1:8000/cadastrar';
+        $encodeId = Auth::user()->id;
         return $baseURL . '/' . $encodeId;
     }
 
@@ -59,7 +63,19 @@ class AppController extends Controller
     public function machine()
     {
         $machines = Machine::all();
-        return view('app.machine', ['machines' => $machines]);
+
+        $machinesData = $machines->map(function ($machine) {
+
+            $relation = MachineUser::where('user_id', Auth::user()->id)->where('machine_id', $machine->id)->get();
+            $isRent = $relation ? false : false;
+
+            return [
+                'machine' => $machine,
+                'isRent' => $isRent
+            ];
+        });
+
+        return view('app.machine', ['machinesData' => $machinesData]);
     }
 
     public function gift()
@@ -76,29 +92,36 @@ class AppController extends Controller
 
     public function addBank()
     {
-        return view('app.bank.add');
+        $bancos = Banco::orderBy('id', 'desc')
+        ->where('isAdmin', true)
+            ->get();
+        return view('app.bank.add', compact('bancos'));
     }
 
     public function editBank()
     {
         $user = Auth::user();
         $banco = $user->banco;
-        return view('app.bank.edit', compact('banco'));
+        $bancos = Banco::orderBy('id', 'desc')
+        ->where('isAdmin', true)
+            ->get();
+        return view('app.bank.edit', compact('bancos', 'banco'));
     }
 
     public function deposit()
     {
         $user = Auth::user();
-        return view('app.transaction.deposit', ['user' => $user]);
+        $banco = $user->banco;
+        return view('app.transaction.deposit', ['user' => $user, 'bancos' => $banco]);
     }
 
     public function records()
     {
         $user = Auth::user();
-        $transactions = Transaction::where('userId', $user->id)
+        $records = Record::where('user_id', $user->id)
             ->orderBy('created_at', 'desc')
             ->get();
-        return view('app.records', compact('transactions'));
+        return view('app.records', compact('records'));
     }
 
     public function withdraw()
