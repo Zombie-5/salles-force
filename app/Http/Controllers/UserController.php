@@ -65,7 +65,7 @@ class UserController extends Controller
 
         // Verificar se o ID é válido
         if (!is_numeric($decodedId) || !User::find($decodedId)) {
-            return back()->withErrors(['convite' => 'Código de convite inválido.'])->withInput();
+            return back()->withErrors(['Código de convite inválido.']);
         }
 
         $user = User::create([

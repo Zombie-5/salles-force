@@ -16,8 +16,8 @@ class AppController extends Controller
     public function generateInviteLink()
     {
         // Obter o usuário autenticado
-        $baseURL = 'https://salles-force.onrender.com/cadastrar';
-        //$baseURL = 'http://127.0.0.1:8000/cadastrar';
+        //$baseURL = 'https://salles-force.onrender.com/cadastrar';
+        $baseURL = 'http://127.0.0.1:8000/cadastrar';
         $encodeId = Auth::user()->id;
         return $baseURL . '/' . $encodeId;
     }
@@ -44,8 +44,35 @@ class AppController extends Controller
         $nivel3 = User::whereIn('userId', $nivel2->pluck('id'))->get();  // Os userIds dos subordinados de nível 2
         $totalNivel3 = $nivel3->count();  // Total de subordinados de nível 3
 
+
+        // Buscar as máquinas associadas a cada subordinado
+        $nivel1WithMachines = $nivel1->map(function ($user) {
+            $user->machines = $user->machines;  // Obtendo as máquinas de cada usuário de nível 1
+            return $user;
+        });
+
+        $nivel2WithMachines = $nivel2->map(function ($user) {
+            $user->machines = $user->machines;  // Obtendo as máquinas de cada usuário de nível 2
+            return $user;
+        });
+
+        $nivel3WithMachines = $nivel3->map(function ($user) {
+            $user->machines = $user->machines;  // Obtendo as máquinas de cada usuário de nível 3
+            return $user;
+        });
+
         // Passar as variáveis para a view
-        return view('app.team', compact('nivel1', 'nivel2', 'nivel3', 'totalNivel1', 'totalNivel2', 'totalNivel3', 'inviteLink'));
+        return view('app.team', compact(
+            'nivel1WithMachines',
+            'nivel2WithMachines',
+            'nivel3WithMachines',
+            'totalNivel1',
+            'totalNivel2',
+            'totalNivel3',
+            'inviteLink'
+        ));
+        // Passar as variáveis para a view
+        //return view('app.team', compact('nivel1', 'nivel2', 'nivel3', 'totalNivel1', 'totalNivel2', 'totalNivel3', 'inviteLink'));
     }
 
     public function profile()

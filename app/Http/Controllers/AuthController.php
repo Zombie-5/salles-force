@@ -68,10 +68,10 @@ class AuthController extends Controller
             Auth::login($user);
 
             // Redirecionar para a página inicial após o login bem-sucedido
-            return redirect()->route('app.home');
+            return redirect()->route('app.home')->with('success', 'logado com sucesso!');
         } else {
             // Se o usuário não existir ou a senha não corresponder
-            return redirect()->route('site.login', ['error' => "1"]);
+            return redirect()->route('site.login')->withErrors(['esse número não esta registrado']);
         }
     }
 
@@ -104,7 +104,7 @@ class AuthController extends Controller
             Auth::login($admin);
 
             // Redirecionar para a página inicial do admin após o login bem-sucedido
-            return redirect()->route('admin.dashboard');
+            return redirect()->route('admin.dashboard')->with('success', 'logado com sucesso!');
         } else {
             // Se o administrador não existir ou a senha não corresponder
             return redirect()->route('admin.login', ['error' => "1"]);
@@ -114,6 +114,6 @@ class AuthController extends Controller
     public function sair()
     {
         Auth::logout();
-        return redirect()->route('site.login');
+        return redirect()->route('site.login')->with('success', 'sessão terminada com sucesso!');
     }
 }

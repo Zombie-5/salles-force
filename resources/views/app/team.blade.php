@@ -32,10 +32,16 @@
                     Total Convidados N1: {{ $totalNivel1 }}
                 </div>
                 <hr>
-                @forelse ($nivel1 as $guest)
+                @forelse ($nivel1WithMachines as $guest)
                     <div class="myCard-vip-info">
                         <span class="item">{{ $guest->telefone }}</span>
-                        <span class="suave" style="font-size: 12px; font-weight: 500">{{ $guest->created_at }}</span>
+                        <ul class="machine-list">
+                            @foreach ($guest->machines as $machine)
+                                <li>{{ $machine->name }}. </li>
+                            @endforeach
+                        </ul>
+                        <span class="suave"
+                            style="font-size: 12px; font-weight: 500; margin-top: -10px">{{ $guest->created_at }}</span>
                     </div>
                     <hr>
                 @empty
@@ -50,9 +56,16 @@
                     Total Convidados N2: {{ $totalNivel2 }}
                 </div>
                 <hr>
-                @forelse ($nivel2 as $guest)
-                    <span class="item">{{ $guest->telefone }}</span>
-                    <span class="suave" style="font-size: 12px; font-weight: 500">{{ $guest->created_at }}</span>
+                @forelse ($nivel2WithMachines as $guest)
+                    <div class="myCard-vip-info">
+                        <span class="item">{{ $guest->telefone }}</span>
+                        <ul class="machine-list">
+                            @foreach ($guest->machines as $machine)
+                                <li>{{ $machine->name }}. </li>
+                            @endforeach
+                        </ul>
+                        <span class="suave" style="font-size: 12px; font-weight: 500; margin-top: -10px">{{ $guest->created_at }}</span>
+                    </div>
                     <hr>
                 @empty
                     <div class="myCard-vip-info">
@@ -66,9 +79,16 @@
                     Total Convidados N3: {{ $totalNivel3 }}
                 </div>
                 <hr>
-                @forelse ($nivel3 as $guest)
-                    <span class="item">{{ $guest->telefone }}</span>
-                    <span class="suave" style="font-size: 12px; font-weight: 500">{{ $guest->created_at }}</span>
+                @forelse ($nivel3WithMachines as $guest)
+                    <div class="myCard-vip-info">
+                        <span class="item">{{ $guest->telefone }}</span>
+                        <ul class="machine-list">
+                            @foreach ($guest->machines as $machine)
+                                <li>{{ $machine->name }}. </li>
+                            @endforeach
+                        </ul>
+                        <span class="suave" style="font-size: 12px; font-weight: 500; margin-top: -10px">{{ $guest->created_at }}</span>
+                    </div>
                     <hr>
                 @empty
                     <div class="myCard-vip-info">
