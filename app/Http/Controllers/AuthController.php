@@ -59,6 +59,11 @@ class AuthController extends Controller
         $user = User::where('telefone', $telefone)->first();
 
         if ($user && Hash::check($password, $user->password)) {
+
+            if (!$user->isActive) {
+                // Se o usuário estiver banido, redirecionar com uma mensagem de erro
+                return redirect()->route('site.login')->withErrors(['Sua conta foi banida. Contacte um assistente']);
+            }
             // Usar o Auth para autenticar o usuário
             Auth::login($user);
 
