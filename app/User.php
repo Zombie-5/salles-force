@@ -37,6 +37,7 @@ class User extends Authenticatable
             'remainingTotal',
             'incomeToday',
             'incomeTotal',
+            'last_collection',
             'created_at'
         ]);
     }
