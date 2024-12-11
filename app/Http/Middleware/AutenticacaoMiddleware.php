@@ -22,13 +22,6 @@ class AutenticacaoMiddleware
         if (Auth::check()) {
             $userId = Auth::user();
             $user= User::find($userId->id);
-
-            if ($user && $user->last_reset_income_today !== Carbon::now()->toDateString()) {
-                $user->incomeToday = 0;
-                $user->last_reset_income_today = Carbon::now()->toDateString();
-                $user->save();
-            }
-
             return $next($request);
         }
 

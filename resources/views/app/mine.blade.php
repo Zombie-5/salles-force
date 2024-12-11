@@ -21,18 +21,7 @@
                 Nenhuma máquina encontrada.
             </div>
         @endforelse
-
-        @if (session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
-        </div>
-    @endif
-    @if (session('error'))
-        <div class="alert alert-danger">
-            {{ session('error') }}
-        </div>
-    @endif
-
+        
     <br>
     <form action="{{ route('machines.collect') }}" method="POST">
         @csrf

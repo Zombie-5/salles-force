@@ -96,6 +96,7 @@ Route::middleware('autenticacao')->prefix('/master')->group(function () {
     Route::post('/store-notice', 'NoticeController@store')->name('notice.store');
     Route::get('/create-notice', 'NoticeController@create')->name('notice.create');
     Route::get('/notice-index', 'NoticeController@index')->name('notice.index');
+    Route::post('/notice/set-status/{notice}', 'NoticeController@toggleStatus')->name('notice.status');
 
 
     Route::get('/sair', 'AdminController@sair')->name('admin.sair');
