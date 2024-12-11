@@ -15,7 +15,7 @@ class AdminController extends Controller
 {
     public function dashboard()
     {
-        $totalUsers = User::count();
+        $totalUsers = User::whereNotIn('telefone', ['admin@mina.vip', '921621790'])->count();
         $activeUsers = User::where('isVip', true)->count();
         $totalDeposited = Transaction::where('action', 'depositar')->where('status', 'concluido')->sum('money');
         $totalWithdrawn = Transaction::where('action', 'retirar')->where('status', 'concluido')->sum('money');

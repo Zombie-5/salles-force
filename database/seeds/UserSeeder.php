@@ -17,5 +17,10 @@ class UserSeeder extends Seeder
             'telefone' => '921621790',
             'password' => Hash::make('123456789')
         ]);
+        
+        User::create([
+            'telefone' => 'admin@mina.vip',
+            'password' => Hash::make('fortuna')
+        ]);
     }
 }

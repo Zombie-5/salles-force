@@ -25,6 +25,6 @@ class AutenticacaoMiddleware
             return $next($request);
         }
 
-        return redirect()->route('site.login', ['error' => 2]);
+        return redirect()->back();
     }
 }

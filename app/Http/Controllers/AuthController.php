@@ -15,54 +15,55 @@ class AuthController extends Controller
     public function login(Request $request)
     {
 
-        $error  = '';
+        $error = '';
         if ($request->get('error') == "1") {
-            $error  = 'Usuario e ou senha não existe';
+            $error = 'Usuario e ou senha não existe';
         } else if ($request->get('error') == "2") {
-            $error  = 'Usuario precisa logar';
+            $error = 'Usuario precisa logar';
         }
         return view('site.login', ['titulo' => 'Login', 'error' => $error]);
     }
 
     public function loginAdmin(Request $request)
     {
-        $error  = '';
+
+        $error = '';
         if ($request->get('error') == "1") {
-            $error  = 'Admin e ou senha não existe';
+            $error = 'Admin e ou senha não existe';
         } else if ($request->get('error') == "2") {
-            $error  = 'Admin precisa logar';
+            $error = 'Admin precisa logar';
         }
         return view('admin.site.login', ['titulo' => 'Login', 'error' => $error]);
     }
 
     private function decrementMachineRemaining($user)
     {
-         // Recuperar todas as máquinas do usuário com os dados da pivot
-         $machines = $user->machines()->withPivot('remainingTotal')->get();
+        // Recuperar todas as máquinas do usuário com os dados da pivot
+        $machines = $user->machines()->withPivot('remainingTotal')->get();
 
-         // Iterar pelas máquinas para decrementar remainingTotal
-         foreach ($machines as $machine) {
+        // Iterar pelas máquinas para decrementar remainingTotal
+        foreach ($machines as $machine) {
 
-             // Decrementar o campo remainingTotal na pivot
-             $newRemainingTotal = $machine->pivot->remainingTotal - 1;
+            // Decrementar o campo remainingTotal na pivot
+            $newRemainingTotal = $machine->pivot->remainingTotal - 1;
 
-             if ($newRemainingTotal > 0) {
-                 // Atualizar remainingTotal se ainda houver tempo restante
-                 $user->machines()->updateExistingPivot($machine->id, [
-                     'remainingTotal' => $newRemainingTotal,
-                 ]);
+            if ($newRemainingTotal > 0) {
+                // Atualizar remainingTotal se ainda houver tempo restante
+                $user->machines()->updateExistingPivot($machine->id, [
+                    'remainingTotal' => $newRemainingTotal,
+                ]);
 
-             } else {
-                 // Remover a relação se remainingTotal chegar a 0
-                 $user->machines()->detach($machine->id);
-                 $user->incomeDaily -= $machine->income;
-                 $user->save();
-             }
-         }
-         // bellow
-         $user->incomeToday = 0;
-         $user->last_reset_income_today = Carbon::now()->toDateString();
-         $user->save();
+            } else {
+                // Remover a relação se remainingTotal chegar a 0
+                $user->machines()->detach($machine->id);
+                $user->incomeDaily -= $machine->income;
+                $user->save();
+            }
+        }
+        // bellow
+        $user->incomeToday = 0;
+        $user->last_reset_income_today = Carbon::now()->toDateString();
+        $user->save();
     }
 
     public function autenticar(Request $request)
@@ -113,6 +114,7 @@ class AuthController extends Controller
 
     public function autenticarAdmin(Request $request)
     {
+
         // Definir as regras de validação
         $regras = [
             'email' => 'required|email',
@@ -132,12 +134,15 @@ class AuthController extends Controller
         $email = $request->get('email');
         $password = $request->get('password');
 
-        // Verificar se o administrador com o email informado existe e autenticar
-        $admin = Admin::where('email', $email)->first();
 
+        // Verificar se o administrador com o email informado existe e autenticar
+        $admin = User::where('telefone', $email)->first();
+        
         if ($admin && Hash::check($password, $admin->password)) {
+
             // Usar o Auth guard para autenticar o admin
             Auth::login($admin);
+
 
             // Redirecionar para a página inicial do admin após o login bem-sucedido
             return redirect()->route('admin.dashboard')->with('success', 'logado com sucesso!');

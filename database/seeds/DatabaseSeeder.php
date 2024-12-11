@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
             DB::statement("ALTER SEQUENCE users_id_seq RESTART WITH 5100");
         }
 
-        $this->call(AdminSeeder::class);
+        //$this->call(AdminSeeder::class);
         $this->call(UserSeeder::class);
     }
 }

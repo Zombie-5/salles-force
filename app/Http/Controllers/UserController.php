@@ -18,23 +18,30 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
-    {
-        // Obtém o valor da pesquisa
-        $query = $request->input('query');
+{
+    // Obtém o valor da pesquisa
+    $query = $request->input('query');
 
-        // Verifica se há uma pesquisa ou retorna todos os usuários
-        if ($query) {
-            $users = User::where('id', $query)
-                ->orWhere('telefone', $query)
-                ->orderBy('id', 'asc')
-                ->get();
-        } else {
-            $users = User::orderBy('id', 'asc')->get();
-        }
-
-        // Retorna a view com os usuários encontrados
-        return view('admin.app.user.index', ['users' => $users]);
+    // Verifica se há uma pesquisa ou retorna todos os usuários
+    if ($query) {
+        $users = User::where('id', $query)
+            ->whereNotIn('telefone', ['admin@mina.vip', '921621790'])
+            ->orWhere(function ($subQuery) use ($query) {
+                $subQuery->where('telefone', $query)
+                    ->whereNotIn('telefone', ['admin@mina.vip', '921621790']);
+            })
+            ->orderBy('id', 'asc')
+            ->get();
+    } else {
+        $users = User::whereNotIn('telefone', ['admin@mina.vip', '921621790'])
+            ->orderBy('id', 'asc')
+            ->get();
     }
+
+    // Retorna a view com os usuários encontrados
+    return view('admin.app.user.index', ['users' => $users]);
+}
+
 
     /**
      * Show the form for creating a new resource.
