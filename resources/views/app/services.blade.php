@@ -7,7 +7,7 @@
                 <h2 class="subtitulo-pagina">Grupos de Comunidade</h2>
                 <ul class="lista-links">
                     <li>
-                        <a href="https://chat.whatsapp.com/your-whatsapp-group-link" class="link-social whatsapp">
+                        <a href="https://chat.whatsapp.com/ID2sKpw67ywEQdssyX3ZcH" class="link-social whatsapp">
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 24 24" fill="none"
                                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path
@@ -34,7 +34,7 @@
                 <h2 class="subtitulo-pagina">Fale com um Assistente</h2>
                 <ul class="lista-links">
                     <li>
-                        <a href="https://wa.me/your-whatsapp-number" class="link-social whatsapp">
+                        <a href="https://wa.me/244953623511" class="link-social whatsapp">
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 24 24" fill="none"
                                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path
@@ -45,7 +45,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="https://t.me/your-telegram-bot-username" class="link-social telegram">
+                        <a href="https://t.me/sallesforce_one1" class="link-social telegram">
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 24 24" fill="none"
                                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <line x1="22" y1="2" x2="11" y2="13"></line>
