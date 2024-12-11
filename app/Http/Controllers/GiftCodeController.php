@@ -75,7 +75,7 @@ class GiftCodeController extends Controller
             // Marca o token como usado no banco de dados
             $giftCode->update(['status' => 'used']);
 
-            return redirect()->back()->with('success', 'presente resgatado com sucesso!');;
+            return redirect()->back()->with('success', 'presente resgatado com sucesso! '.$giftCode->value.' Kz');;
         } catch (\Exception $e) {
             dd($e);
             return redirect()->back()->withErrors(['Token inválido']);

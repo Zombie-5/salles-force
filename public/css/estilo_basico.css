@@ -1014,6 +1014,23 @@ h1 {
     transition: all 0.3s ease;
 }
 
+.form select {
+    width: 90%;
+    /* Ocupe 90% da largura da tela */
+    height: 40px;
+    padding: 0px 20px;
+    /* Maior área de toque */
+    margin: 10px 0;
+    box-sizing: border-box;
+    border-radius: 10px;
+    background-color: transparent;
+    color: #333;
+    border: solid 1px #333;
+    font-size: 3vw;
+    /* Tamanho de fonte mais confortável */
+    transition: all 0.3s ease;
+}
+
 .ajust {
     margin: 10px 0px;
     width: 90%;
@@ -1490,7 +1507,7 @@ select option {
     /* Remove os marcadores padrão */
     padding-left: 0;
     /* Remove o recuo à esquerda */
-    
+
 }
 
 /* Estiliza os itens da lista */
@@ -1528,4 +1545,8 @@ select.status-pendente {
     border: 1px solid #ccc;
     padding: 5px;
     font-size: 14px;
+}
+
+.div-invite-info {
+    margin-right: 590px ;
 }

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Carbon\Carbon;
 
 class AuthController extends Controller
 {
@@ -32,6 +33,36 @@ class AuthController extends Controller
             $error  = 'Admin precisa logar';
         }
         return view('admin.site.login', ['titulo' => 'Login', 'error' => $error]);
+    }
+
+    private function decrementMachineRemaining($user)
+    {
+         // Recuperar todas as máquinas do usuário com os dados da pivot
+         $machines = $user->machines()->withPivot('remainingTotal')->get();
+
+         // Iterar pelas máquinas para decrementar remainingTotal
+         foreach ($machines as $machine) {
+
+             // Decrementar o campo remainingTotal na pivot
+             $newRemainingTotal = $machine->pivot->remainingTotal - 1;
+
+             if ($newRemainingTotal > 0) {
+                 // Atualizar remainingTotal se ainda houver tempo restante
+                 $user->machines()->updateExistingPivot($machine->id, [
+                     'remainingTotal' => $newRemainingTotal,
+                 ]);
+
+             } else {
+                 // Remover a relação se remainingTotal chegar a 0
+                 $user->machines()->detach($machine->id);
+                 $user->incomeDaily -= $machine->income;
+                 $user->save();
+             }
+         }
+         // bellow
+         $user->incomeToday = 0;
+         $user->last_reset_income_today = Carbon::now()->toDateString();
+         $user->save();
     }
 
     public function autenticar(Request $request)
@@ -64,6 +95,11 @@ class AuthController extends Controller
                 // Se o usuário estiver banido, redirecionar com uma mensagem de erro
                 return redirect()->route('site.login')->withErrors(['Sua conta foi banida. Contacte um assistente']);
             }
+
+            if ($user->last_reset_income_today !== Carbon::now()->toDateString()) {
+                $this->decrementMachineRemaining($user);
+            }
+
             // Usar o Auth para autenticar o usuário
             Auth::login($user);
 

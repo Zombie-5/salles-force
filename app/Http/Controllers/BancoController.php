@@ -56,7 +56,7 @@ class BancoController extends Controller
         $banco = Banco::create($request->all());
 
         if (isset($banco->user_id)) {
-            return redirect()->route('app.bank')->withErrors(['Você já tem uma conta bancaria associada']);
+            return redirect()->route('app.bank');
         }
 
         return redirect()->route('admin.bank.index')->with('success', 'Banco Associado com sucesso!');
@@ -102,7 +102,6 @@ class BancoController extends Controller
             'owner' => 'required',
             'iban' => [
                 'required',
-                'numeric',
                 function ($attribute, $value, $fail) use ($banco, $userId) {
                     // Verificar se o IBAN está sendo alterado
                     if ($banco->iban !== $value) {

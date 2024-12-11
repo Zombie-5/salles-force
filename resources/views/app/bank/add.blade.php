@@ -6,7 +6,7 @@
         <br><br>
         <form class="form" action="{{ route('admin.bank.store') }}" method="POST">
             @csrf
-            <span>Criar Conta Bancária</span>
+            <span>Adicionar Conta Bancária</span>
 
             <select id="bankSelect" class="bank-select" name="name">
                 <option value="">Selecione um banco</option>

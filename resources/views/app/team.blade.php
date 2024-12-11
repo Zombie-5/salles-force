@@ -13,6 +13,11 @@
             </div>
         </button>
         <br>
+        <div style="display: flex; flex-direction: column; width:100%; justify-content: flex-start; color: #008cbb">
+            <span style=" color: #008cbb">Total de convidados: {{ $totalInvites }}</span>
+            <span style=" color: #008cbb">Total de Comissão: {{ number_format($totalIncomeInvites, 2, ',', '.') }} kz</span>
+        </div>
+        <br>
         <ul class="tab-list">
             <li class="tab-item">
                 <a href="#n1" class="tab-link active" data-tab="n1">Nível 1</a>

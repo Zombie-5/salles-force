@@ -19,8 +19,11 @@ class TransactionController extends Controller
      */
     public function index()
     {
-        $transactions = Transaction::orderBy('created_at', 'desc')->get();
-        return view('admin.app.transaction', ['transactions' => $transactions]);
+        $transactions = Transaction::orderBy('created_at', 'desc')->where('status','!=', 'pendente')->where('status','!=', 'processando')->get();
+        $transactionsDeposited = Transaction::orderBy('created_at', 'desc')->where('status','!=', 'concluido')->where('status','!=', 'rejeitado')->where('action', 'depositar')->get();//where('status', 'concluido')->sum('money');
+        $transactionsWithdrawn = Transaction::orderBy('created_at', 'desc')->where('status','!=', 'concluido')->where('status','!=', 'rejeitado')->where('action', 'retirar')->get();
+
+        return view('admin.app.transaction', ['transactions' => $transactions, 'transactionsDeposited' => $transactionsDeposited, 'transactionsWithdrawn' => $transactionsWithdrawn]);
     }
 
     public function indexDeposit()
@@ -169,9 +172,13 @@ class TransactionController extends Controller
         // Verifica a ação
         if ($action === 'depositar') {
 
-            // Validação de entrada
+             // Validação de entrada
             $request->validate([
                 'query' => 'required|numeric|min:10000',
+            ], [
+                'query.required' => 'O montante é obrigatório.',
+                'query.numeric' => 'O montante deve ser númerico.',
+                'query.min' => 'O valor mínimo permitido para recarga é 10.000 kz',
             ]);
 
             $depositAmount = $request->input('query') ?: $request->input('custom_amount');

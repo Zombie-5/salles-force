@@ -16,11 +16,11 @@
             <section class="news-section">
                 <div class="news-header">
                     <h2>Últimas notícias</h2>
-                    <a href="#" class="more-link">Mais ></a>
+                    <a href="#" id="moreLink" class="more-link">Mais ></a>
                 </div>
-                <div class="news-myCard">
+                <div id="newsCard" class="news-myCard">
                     <img src="{{ asset('img/mine.png') }}" alt="News thumbnail" width="60" height="60">
-                    <span>{{ $notices[1]->notice }}</span>
+                    <span style="flex-wrap: nowrap" id="newsTitle">{{ $notices[0]->notice }}</span> <!-- Exibe o título da primeira notícia -->
                 </div>
             </section>
 
@@ -48,8 +48,25 @@
     </div>
 
     <script>
+
         function copyToClipboard(link) {
             navigator.clipboard.writeText(link);
         }
+
+        let currentIndex = 0;
+        const notices = @json($notices); // Transforma a variável notices em um array JavaScript
+        const newsTitle = document.getElementById('newsTitle');
+        const newsCard = document.getElementById('newsCard');
+
+        document.getElementById('moreLink').addEventListener('click', function(e) {
+            e.preventDefault(); // Evita que o link recarregue a página
+
+            // Atualiza o índice da notícia atual
+            currentIndex = (currentIndex + 1) % notices.length;
+
+            // Atualiza o título da notícia
+            newsTitle.textContent = notices[currentIndex].notice;
+        });
+
     </script>
 @endsection

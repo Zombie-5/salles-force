@@ -157,9 +157,26 @@ class UserController extends Controller
         return redirect()->back()->withErrors(['Usuario não encontrado']);
     }
 
+    public function exibirMaquinas()
+    {
+        $userId = Auth::user();
+        $user = User::find($userId->id);
+        $machines = $user->machines()->get();
+
+        $machinesData = $machines->map(function ($machine) {
+            $pivot = $machine->pivot;
+            return [
+                'machine' => $machine,
+                'remainingTotal' => $pivot->remainingTotal,
+                'incomeTotal' => number_format($pivot->incomeTotal, 2) . 'kz',
+            ];
+        });
+
+        return view('app.mine', ['machinesData' => $machinesData, 'canCollect' => $user->last_collection !== now()->toDateString()]);
+    }
+
     public function alugarMaquina(Request $request, $machineId)
     {
-
         // Obter o usuário autenticado
         $userId = Auth::user();
         $user = User::find($userId->id);
@@ -168,7 +185,7 @@ class UserController extends Controller
         $machine = Machine::findOrFail($machineId);
 
         if ($user->money < $machine->price) {
-            return redirect()->back()->withErrors(['Você não tem dinheiro suficiente para alugar esta máquina.']);
+            return back()->withErrors(['Você não tem dinheiro suficiente para alugar esta máquina.']);
         }
 
         // Verificar e definir valores de coleta
@@ -196,7 +213,7 @@ class UserController extends Controller
             // Comissão de 10% para o superior de nível 1 (direto)
             $superiorNivel1 = User::find($user->userId);
             if ($superiorNivel1) {
-            $comissaoNivel1 = $machine->price * 0.10;
+                $comissaoNivel1 = $machine->price * 0.1;
                 $superiorNivel1->money += $comissaoNivel1;
                 $superiorNivel1->incomeToday += $comissaoNivel1;
                 $superiorNivel1->incomeTotal += $comissaoNivel1;
@@ -248,24 +265,6 @@ class UserController extends Controller
         return redirect()->back()->with('success', 'Máquina alugada com sucesso!');
     }
 
-    public function exibirMaquinas()
-    {
-        $userId = Auth::user();
-        $user = User::find($userId->id);
-        $machines = $user->machines()->get();
-
-        $machinesData = $machines->map(function ($machine) {
-            $pivot = $machine->pivot;
-            return [
-                'machine' => $machine,
-                'remainingTotal' => $pivot->remainingTotal,
-                'incomeTotal' => number_format($pivot->incomeTotal, 2) . 'kz',
-            ];
-        });
-
-        return view('app.mine', ['machinesData' => $machinesData, 'canCollect' => $user->last_collection !== now()->toDateString()]);
-    }
-
     public function coletarRecompensas()
     {
         $userId = Auth::user();
@@ -294,65 +293,6 @@ class UserController extends Controller
                 'last_collection' => $today,
             ]);
 
-                Record::create([
-                    'name' => 'Renda Diária',
-                    'money' => $income,
-                    'user_id' => $user->id,
-                ]);
-            } else {
-                // Remover a relação se remainingTotal chegar a 0
-                $user->machines()->detach($machine->id);
-                $user->incomeDaily -= $machine->income;
-                $user->save();
-            }
-        }
-
-        // Atualizar o saldo do usuário
-        $user->money += $user->incomeDaily;
-        $user->incomeToday = $user->incomeDaily;
-        $user->incomeTotal += $user->incomeDaily;
-        $user->last_collection = $today;
-        $user->save();
-
-        return redirect()->back()->with('success', "Recompensas coletadas com sucesso! Total: {$user->incomeDaily} kz.");
-    }
-
-
-
-
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(User $user)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, User $user)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(User $user)
-    {
-        //
             Record::create([
                 'name' => 'Renda Diária',
                 'money' => $income,
@@ -362,4 +302,5 @@ class UserController extends Controller
 
         return redirect()->back()->with('success', 'Recompensas coletadas com sucesso');
     }
+
 }

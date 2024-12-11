@@ -63,6 +63,9 @@ class AppController extends Controller
             return $user;
         });
 
+        $totalIncomeInvites = Record::where('user_id', Auth::id())->where('name', 'Bônus Convidado')->sum('money');
+        $totalInvites = $totalNivel1 + $totalNivel2 + $totalNivel3;
+
         // Passar as variáveis para a view
         return view('app.team', compact(
             'nivel1WithMachines',
@@ -71,7 +74,9 @@ class AppController extends Controller
             'totalNivel1',
             'totalNivel2',
             'totalNivel3',
-            'inviteLink'
+            'inviteLink',
+            'totalIncomeInvites',
+            'totalInvites'
         ));
         // Passar as variáveis para a view
         //return view('app.team', compact('nivel1', 'nivel2', 'nivel3', 'totalNivel1', 'totalNivel2', 'totalNivel3', 'inviteLink'));
@@ -91,7 +96,7 @@ class AppController extends Controller
 
     public function machine()
     {
-        $machines = Machine::all();
+        $machines = Machine::orderBy('id', 'desc')->get();
 
         $machinesData = $machines->map(function ($machine) {
 
