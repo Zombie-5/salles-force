@@ -20,7 +20,11 @@
                 </div>
                 <div id="newsCard" class="news-myCard">
                     <img src="{{ asset('img/mine.png') }}" alt="News thumbnail" width="60" height="60">
-                    <span style="flex-wrap: nowrap" id="newsTitle">{{ $notices[0]->notice }}</span> <!-- Exibe o título da primeira notícia -->
+                    @if (!empty($notices) && count($notices) > 0)
+                        <span style="flex-wrap: nowrap" id="newsTitle">{{ $notices[0]->notice }}</span>
+                    @else
+                        <span>Olá mundo</span>
+                    @endif
                 </div>
             </section>
 
@@ -48,7 +52,6 @@
     </div>
 
     <script>
-
         function copyToClipboard(link) {
             navigator.clipboard.writeText(link);
         }
@@ -67,6 +70,5 @@
             // Atualiza o título da notícia
             newsTitle.textContent = notices[currentIndex].notice;
         });
-
     </script>
 @endsection
