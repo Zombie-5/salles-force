@@ -18,9 +18,17 @@ class UserSeeder extends Seeder
             'password' => Hash::make('123456789')
         ]); */
 
-        User::create([
-            'telefone' => 'admin@mina.vip',
-            'password' => Hash::make('fortuna')
-        ]);
+        $adminUser = User::firstOrCreate(
+            ['telefone' => 'admin@mina.vip'], // Condições para verificar existência
+            ['password' => Hash::make('fortuna')] // Dados a serem criados se não existir
+        );
+
+        if ($adminUser->wasRecentlyCreated) {
+            // Exibe mensagem se o usuário foi criado agora
+            $this->command->info('Usuário admin@mina.vip foi criado com sucesso!');
+        } else {
+            // Exibe mensagem se o usuário já existia
+            $this->command->info('Usuário admin@mina.vip já existe.');
+        }
     }
 }
