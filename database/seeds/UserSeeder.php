@@ -13,11 +13,11 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        User::create([
+        /* User::create([
             'telefone' => '921621790',
             'password' => Hash::make('123456789')
-        ]);
-        
+        ]); */
+
         User::create([
             'telefone' => 'admin@mina.vip',
             'password' => Hash::make('fortuna')
