@@ -10,17 +10,5 @@
 
                 <button type="submit" class="botao">Resgatar Código</button>
             </form>
-
-            @if (session('success'))
-                <div class="mensagem-sucesso">
-                    <p>{{ session('success') }}</p>
-                </div>
-            @endif
-
-            @if (session('error'))
-                <div class="mensagem-erro">
-                    <p>{{ session('error') }}</p>
-                </div>
-            @endif
     </div>
 @endsection

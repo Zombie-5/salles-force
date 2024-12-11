@@ -17,8 +17,8 @@ class AppController extends Controller
     public function generateInviteLink()
     {
         // Obter o usuário autenticado
-        $baseURL = 'https://salles-force.onrender.com/cadastrar';
-        //$baseURL = 'http://127.0.0.1:8000/cadastrar';
+        //$baseURL = 'https://salles-force.onrender.com/cadastrar';
+        $baseURL = 'http://127.0.0.1:8000/cadastrar';
         $encodeId = Auth::user()->id;
         return $baseURL . '/' . $encodeId;
     }
@@ -46,8 +46,35 @@ class AppController extends Controller
         $nivel3 = User::whereIn('userId', $nivel2->pluck('id'))->get();  // Os userIds dos subordinados de nível 2
         $totalNivel3 = $nivel3->count();  // Total de subordinados de nível 3
 
+
+        // Buscar as máquinas associadas a cada subordinado
+        $nivel1WithMachines = $nivel1->map(function ($user) {
+            $user->machines = $user->machines;  // Obtendo as máquinas de cada usuário de nível 1
+            return $user;
+        });
+
+        $nivel2WithMachines = $nivel2->map(function ($user) {
+            $user->machines = $user->machines;  // Obtendo as máquinas de cada usuário de nível 2
+            return $user;
+        });
+
+        $nivel3WithMachines = $nivel3->map(function ($user) {
+            $user->machines = $user->machines;  // Obtendo as máquinas de cada usuário de nível 3
+            return $user;
+        });
+
         // Passar as variáveis para a view
-        return view('app.team', compact('nivel1', 'nivel2', 'nivel3', 'totalNivel1', 'totalNivel2', 'totalNivel3', 'inviteLink'));
+        return view('app.team', compact(
+            'nivel1WithMachines',
+            'nivel2WithMachines',
+            'nivel3WithMachines',
+            'totalNivel1',
+            'totalNivel2',
+            'totalNivel3',
+            'inviteLink'
+        ));
+        // Passar as variáveis para a view
+        //return view('app.team', compact('nivel1', 'nivel2', 'nivel3', 'totalNivel1', 'totalNivel2', 'totalNivel3', 'inviteLink'));
     }
 
     public function profile()
@@ -68,8 +95,13 @@ class AppController extends Controller
 
         $machinesData = $machines->map(function ($machine) {
 
-            $relation = MachineUser::where('user_id', Auth::user()->id)->where('machine_id', $machine->id)->get();
-            $isRent = $relation ? false : false;
+            // Verificar se o usuário já está alugando a máquina
+            $relation = MachineUser::where('user_id', Auth::user()->id)
+                ->where('machine_id', $machine->id)
+                ->first(); // Usar first() para pegar apenas o primeiro registro, não a coleção
+
+            // Se a relação existe, então a máquina já está sendo alugada
+            $isRent = $relation ? true : false;
 
             return [
                 'machine' => $machine,
@@ -95,7 +127,7 @@ class AppController extends Controller
     public function addBank()
     {
         $bancos = Banco::orderBy('id', 'desc')
-        ->where('isAdmin', true)
+            ->where('isAdmin', true)
             ->get();
         return view('app.bank.add', compact('bancos'));
     }
@@ -105,7 +137,7 @@ class AppController extends Controller
         $user = Auth::user();
         $banco = $user->banco;
         $bancos = Banco::orderBy('id', 'desc')
-        ->where('isAdmin', true)
+            ->where('isAdmin', true)
             ->get();
         return view('app.bank.edit', compact('bancos', 'banco'));
     }

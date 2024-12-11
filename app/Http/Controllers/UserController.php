@@ -65,7 +65,7 @@ class UserController extends Controller
 
         // Verificar se o ID é válido
         if (!is_numeric($decodedId) || !User::find($decodedId)) {
-            return back()->withErrors(['convite' => 'Código de convite inválido.'])->withInput();
+            return back()->withErrors(['Código de convite inválido.']);
         }
 
         $user = User::create([
@@ -121,7 +121,8 @@ class UserController extends Controller
         $user = User::find($userId);
 
         if (!$user) {
-            return redirect()->back()->with('error', 'Usuário não encontrado.');
+
+            return redirect()->back()->withErrors(['Usuario não encontrado']);
         }
 
         // Somar o valor depositado ao saldo atual
@@ -153,7 +154,7 @@ class UserController extends Controller
         }
 
         // Caso o usuário não seja encontrado
-        return response()->json(['success' => false]);
+        return redirect()->back()->withErrors(['Usuario não encontrado']);
     }
 
     public function alugarMaquina(Request $request, $machineId)
@@ -167,7 +168,7 @@ class UserController extends Controller
         $machine = Machine::findOrFail($machineId);
 
         if ($user->money < $machine->price) {
-            return redirect()->back()->with('error', 'Você não tem dinheiro suficiente para alugar esta máquina.');
+            return redirect()->back()->withErrors(['Você não tem dinheiro suficiente para alugar esta máquina.']);
         }
 
         // Verificar e definir valores de coleta
@@ -293,6 +294,65 @@ class UserController extends Controller
                 'last_collection' => $today,
             ]);
 
+                Record::create([
+                    'name' => 'Renda Diária',
+                    'money' => $income,
+                    'user_id' => $user->id,
+                ]);
+            } else {
+                // Remover a relação se remainingTotal chegar a 0
+                $user->machines()->detach($machine->id);
+                $user->incomeDaily -= $machine->income;
+                $user->save();
+            }
+        }
+
+        // Atualizar o saldo do usuário
+        $user->money += $user->incomeDaily;
+        $user->incomeToday = $user->incomeDaily;
+        $user->incomeTotal += $user->incomeDaily;
+        $user->last_collection = $today;
+        $user->save();
+
+        return redirect()->back()->with('success', "Recompensas coletadas com sucesso! Total: {$user->incomeDaily} kz.");
+    }
+
+
+
+
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\User  $user
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(User $user)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\User  $user
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, User $user)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\User  $user
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(User $user)
+    {
+        //
             Record::create([
                 'name' => 'Renda Diária',
                 'money' => $income,
