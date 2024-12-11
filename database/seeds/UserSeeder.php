@@ -19,8 +19,11 @@ class UserSeeder extends Seeder
         ]); */
 
         $adminUser = User::firstOrCreate(
-            ['telefone' => 'admin@mina.vip'], // Condições para verificar existência
-            ['password' => Hash::make('fortuna')] // Dados a serem criados se não existir
+            ['id' => 1], // Condições para verificar existência
+            [ // Dados a serem criados se não existir
+                'telefone' => 'admin@mina.vip',
+                'password' => Hash::make('fortuna')
+            ]
         );
 
         if ($adminUser->wasRecentlyCreated) {
