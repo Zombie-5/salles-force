@@ -8,6 +8,7 @@ use App\Record;
 use App\Banco;
 use App\User;
 use App\MachineUser;
+use App\Notice;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -25,7 +26,8 @@ class AppController extends Controller
     public function home()
     {
         $inviteLink = $this->generateInviteLink();
-        return view('app.home', compact('inviteLink'));
+        $notices = Notice::orderBy('created_at', 'desc')->where('isActive', true)->get();
+        return view('app.home', compact('inviteLink', 'notices'));
     }
 
     public function team()

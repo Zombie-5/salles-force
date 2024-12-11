@@ -20,7 +20,7 @@
                 </div>
                 <div class="news-myCard">
                     <img src="{{ asset('img/mine.png') }}" alt="News thumbnail" width="60" height="60">
-                    <span>Aproveita a semana de promoção, e ganha ate 500.000kz na sua proxima recarga de 3.000kz</span>
+                    <span>{{ $notices[1]->notice }}</span>
                 </div>
             </section>
 

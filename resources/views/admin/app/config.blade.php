@@ -22,7 +22,7 @@
                 <span>Contas Bancárias</span>
             </a>
 
-            <a href="#" class="myCard-config">
+            <a href="{{ route('notice.index')}}" class="myCard-config">
                 <svg xmlns="http://www.w3.org/2000/svg" class="icon" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

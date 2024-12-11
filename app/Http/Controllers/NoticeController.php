@@ -46,4 +46,21 @@ class NoticeController extends Controller
 
         return redirect()->route('notice.index');
     }
+
+    public function toggleStatus($noticeId)
+    {
+        $notice = Notice::find($noticeId);
+
+        if ($notice) {
+            // Inverte o status do noticia
+            $notice->isActive = !$notice->isActive;
+            $notice->save();
+
+            // Retorna uma resposta JSON indicando sucesso
+            return redirect()->back()->with('success', 'Depósito realizado com sucesso!');
+        }
+
+        // Caso o noticia não seja encontrada
+        return redirect()->back()->withErrors('Noticia não encontrada');
+    }
 }

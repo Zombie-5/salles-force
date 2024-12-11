@@ -19,11 +19,21 @@
                     @forelse ($notices as $notice)
                         <tr>
                             <td>{{ $notice->notice }}</td>
-                            <td>{{ $notice->isActive ? 'Activo':'Inactivo' }}</td>
+                            <td style="cursor: pointer;">
+                                <form action="{{ route('notice.status', $notice->id) }}" method="POST">
+                                    @csrf
+                                    @method('POST') <!-- Necessário para indicar que é um POST -->
+
+                                    <!-- Botão de status que alterna entre 'Ativo' e 'Inativo' -->
+                                    <button type="submit" style="border: none; background: none; cursor: pointer; color: {{ $notice->isActive ? 'green' : 'red' }};">
+                                        {{ $notice->isActive ? 'Activo' : 'Inactivo' }}
+                                    </button>
+                                </form>
+                            </td>
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="5">Nenhum presente encontrado.</td>
+                            <td colspan="5">Nenhuma noticia encontrada.</td>
                         </tr>
                     @endforelse
                 </tbody>
