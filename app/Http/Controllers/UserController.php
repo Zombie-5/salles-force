@@ -18,29 +18,29 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
-{
-    // Obtém o valor da pesquisa
-    $query = $request->input('query');
+    {
+        // Obtém o valor da pesquisa
+        $query = $request->input('query');
 
-    // Verifica se há uma pesquisa ou retorna todos os usuários
-    if ($query) {
-        $users = User::where('id', $query)
-            ->whereNotIn('telefone', ['admin@mina.vip', '921621790'])
-            ->orWhere(function ($subQuery) use ($query) {
-                $subQuery->where('telefone', $query)
-                    ->whereNotIn('telefone', ['admin@mina.vip', '921621790']);
-            })
-            ->orderBy('id', 'asc')
-            ->get();
-    } else {
-        $users = User::whereNotIn('telefone', ['admin@mina.vip', '921621790'])
-            ->orderBy('id', 'asc')
-            ->get();
+        // Verifica se há uma pesquisa ou retorna todos os usuários
+        if ($query) {
+            $users = User::where('id', $query)
+                ->whereNotIn('telefone', ['admin@mina.vip', '921621790'])
+                ->orWhere(function ($subQuery) use ($query) {
+                    $subQuery->where('telefone', $query)
+                        ->whereNotIn('telefone', ['admin@mina.vip', '921621790']);
+                })
+                ->orderBy('id', 'asc')
+                ->get();
+        } else {
+            $users = User::whereNotIn('telefone', ['admin@mina.vip', '921621790'])
+                ->orderBy('id', 'asc')
+                ->get();
+        }
+
+        // Retorna a view com os usuários encontrados
+        return view('admin.app.user.index', ['users' => $users]);
     }
-
-    // Retorna a view com os usuários encontrados
-    return view('admin.app.user.index', ['users' => $users]);
-}
 
 
     /**
@@ -164,11 +164,45 @@ class UserController extends Controller
         return redirect()->back()->withErrors(['Usuario não encontrado']);
     }
 
+    private function decrementMachineRemaining($user)
+    {
+        // Recuperar todas as máquinas do usuário com os dados da pivot
+        $machines = $user->machines()->withPivot('remainingTotal')->get();
+
+        // Iterar pelas máquinas para decrementar remainingTotal
+        foreach ($machines as $machine) {
+
+            // Decrementar o campo remainingTotal na pivot
+            $newRemainingTotal = $machine->pivot->remainingTotal - 1;
+
+            if ($newRemainingTotal > 0) {
+                // Atualizar remainingTotal se ainda houver tempo restante
+                $user->machines()->updateExistingPivot($machine->id, [
+                    'remainingTotal' => $newRemainingTotal,
+                ]);
+            } else {
+                // Remover a relação se remainingTotal chegar a 0
+                $user->machines()->detach($machine->id);
+                $user->incomeDaily -= $machine->income;
+                $user->save();
+            }
+        }
+        // bellow
+        $user->incomeToday = 0;
+        $user->last_reset_income_today = Carbon::now()->toDateString();
+        $user->save();
+    }
+
+
     public function exibirMaquinas()
     {
         $userId = Auth::user();
         $user = User::find($userId->id);
         $machines = $user->machines()->get();
+
+        if ($user->last_reset_income_today !== Carbon::now()->toDateString()) {
+            $this->decrementMachineRemaining($user);
+        }
 
         $machinesData = $machines->map(function ($machine) {
             $pivot = $machine->pivot;
@@ -309,5 +343,4 @@ class UserController extends Controller
 
         return redirect()->back()->with('success', 'Recompensas coletadas com sucesso');
     }
-
 }

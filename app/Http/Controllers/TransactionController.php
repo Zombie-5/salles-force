@@ -239,7 +239,7 @@ class TransactionController extends Controller
                 'userId' => $user->id,
             ]);
 
-            $user->money -= $transaction->money;
+            $user->money -= $depositAmount;
             $user->save();
 
             return redirect()->route('app.records.withdraw')->with('success', 'Retirada solicitada com sucesso!');
