@@ -204,6 +204,10 @@ class TransactionController extends Controller
                 'query.min' => 'O valor mínimo permitido para retirada é 1200 kz',
             ]);
 
+            if (!$user->isVip) {
+                return back()->withErrors(['Apenas mineiros podem soicitar saques, alugue uma máquina e se torne um mineiro']);
+            }
+
             // Obtém o horário atual
             $currentTime = Carbon::now();
 
