@@ -62,9 +62,15 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'telefone' => 'required|max:9|min:9|unique:users,telefone',
+            'telefone' => 'required|regex:/^9\d{8}$/|unique:users,telefone',
             'password' => 'required',
             'convite'  => 'required',
+        ], [
+            'telefone.required' => 'O número de telefone é obrigatório.',
+            'telefone.regex'    => 'O número de telefone é inválido',
+            'telefone.unique'   => 'Este número de telefone já está registrado.',
+            'password.required' => 'A senha é obrigatória.',
+            'convite.required'  => 'O código de convite é obrigatório.',
         ]);
 
         // Descriptografar o convite (ID do usuário)
