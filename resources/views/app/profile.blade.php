@@ -70,9 +70,9 @@
             </div>
         </div>
 
-        <form action="{{ route('app.sair') }}" method="POST">
+        <form action="{{ route('app.sair') }}" method="POST" class="form">
             @csrf
-            <button class="btn-sair" type="submit">Terminar Sessão</button>
+            <button class="btn-sair" style="width: 100%" type="submit">Terminar Sessão</button>
         </form>
     </div>
 @endsection
