@@ -36,15 +36,15 @@ class AppController extends Controller
         $inviteLink = $this->generateInviteLink();
 
         // Buscar subordinados de nível 1 (os que foram convidados diretamente por você)
-        $nivel1 = User::where('userId', Auth::id())->get();  // O userId deve ser igual ao ID do usuário logado
+        $nivel1 = User::where('userId', Auth::id())->orderBy('created_at', 'desc')->get();  // O userId deve ser igual ao ID do usuário logado
         $totalNivel1 = $nivel1->count();  // Total de subordinados de nível 1
 
         // Buscar subordinados de nível 2 (os convidados pelos subordinados de nível 1)
-        $nivel2 = User::whereIn('userId', $nivel1->pluck('id'))->get();  // Os userIds dos subordinados de nível 1
+        $nivel2 = User::whereIn('userId', $nivel1->pluck('id'))->orderBy('created_at', 'desc')->get();  // Os userIds dos subordinados de nível 1
         $totalNivel2 = $nivel2->count();  // Total de subordinados de nível 2
 
         // Buscar subordinados de nível 3 (os convidados pelos subordinados de nível 2)
-        $nivel3 = User::whereIn('userId', $nivel2->pluck('id'))->get();  // Os userIds dos subordinados de nível 2
+        $nivel3 = User::whereIn('userId', $nivel2->pluck('id'))->orderBy('created_at', 'desc')->get();  // Os userIds dos subordinados de nível 2
         $totalNivel3 = $nivel3->count();  // Total de subordinados de nível 3
 
 
