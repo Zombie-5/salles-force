@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/cadastrar/{convite?}', 'UserController@create')->name('site.cadastro');
-Route::post('/cadastrar', 'UserController@store')->name('site.cadastro');
+Route::post('/cadastrar', 'UserController@store')->name('site.cadastro.auth');
 
 Route::get('', 'AuthController@login')->name('site.login');
 Route::post('/login', 'AuthController@autenticar')->name('site.auth');

@@ -5,7 +5,7 @@
         <img src="{{ asset('img/logo.jpg') }}" alt="Home" class="menu-icon-top">
         <h1 class="titulo">SallesForce</h1>
         <span>Crie uma conta e Comece a Ganhar</span>
-        <form action="{{ route('site.cadastro') }}" method="post">
+        <form action="{{ route('site.cadastro.auth') }}" method="post">
             @csrf
             <input class="padrao" name="telefone" value="{{ old('telefone') }}" type="text" placeholder="Telefone">
             {{ $errors->has('telefone') ? $errors->first('telefone') : '' }}
