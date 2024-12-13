@@ -18,10 +18,14 @@ Route::get('/cadastrar/{convite?}', 'UserController@create')->name('site.cadastr
 Route::post('/cadastrar', 'UserController@store')->name('site.cadastro');
 
 Route::get('', 'AuthController@login')->name('site.login');
-Route::post('/login', 'AuthController@autenticar')->name('site.login');
+Route::post('/login', 'AuthController@autenticar')->name('site.auth');
 
 Route::get('/master/login/{error?}', 'AuthController@loginAdmin')->name('admin.login');
-Route::post('/master/login', 'AuthController@autenticarAdmin')->name('admin.login');
+Route::post('/master/login', 'AuthController@autenticarAdmin')->name('admin.auth');
+
+Route::fallback(function () {
+    return view('fallback');
+});
 
 Route::middleware('autenticacao')->prefix('/app')->group(function () {
 
@@ -54,7 +58,7 @@ Route::middleware('autenticacao')->prefix('/app')->group(function () {
 
     Route::post('/redeem', 'GiftCodeController@redeem')->name('gift.redeem');
 
-    Route::get('/sair', 'AuthController@sair')->name('app.sair');
+    Route::post('/sair', 'AuthController@sair')->name('app.sair');
 });
 
 Route::middleware('autenticacao')->prefix('/master')->group(function () {
@@ -99,5 +103,5 @@ Route::middleware('autenticacao')->prefix('/master')->group(function () {
     Route::post('/notice/set-status/{notice}', 'NoticeController@toggleStatus')->name('notice.status');
 
 
-    Route::get('/sair', 'AdminController@sair')->name('admin.sair');
+    Route::post('/admin/sair', 'AdminController@sair')->name('admin.sair');
 });

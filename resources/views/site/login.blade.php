@@ -4,7 +4,7 @@
     <div class="conteudo-pagina">
         <img src="{{ asset('img/logo.jpg') }}" alt="Home" class="menu-icon-top">
         <h1 class="titulo">SallesForce</h1>
-        <form action={{ route('site.login') }} method="post">
+        <form action={{ route('site.auth') }} method="post">
             @csrf
             <input class="padrao" name="telefone" value="{{ old('telefone') }}" type="text" placeholder="Telefone">
             {{ $errors->has('telefone') ? $errors->first('telefone') : '' }}

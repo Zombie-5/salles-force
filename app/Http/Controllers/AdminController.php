@@ -45,10 +45,19 @@ class AdminController extends Controller
         return view('admin.app.config');
     }
 
-    public function sair()
+    public function sair(Request $request)
     {
-        Auth::logout();
-        return redirect()->route('admin.login');
+        
+         // Finaliza a sessão do usuário
+         Auth::logout();
+
+         // Invalida a sessão atual
+         $request->session()->invalidate();
+ 
+         // Gera um novo token de sessão para evitar CSRF
+         $request->session()->regenerateToken();
+
+        return redirect()->route('admin.login')->with('success', 'Sessão encerrada com sucesso!');
     }
 
     /**

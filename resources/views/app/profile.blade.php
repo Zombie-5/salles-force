@@ -69,6 +69,10 @@
                 </a>
             </div>
         </div>
-        <a href="{{ route('app.sair') }}" class="btn-sair">Terminar Sessão</a>
+
+        <form action="{{ route('app.sair') }}" method="POST">
+            @csrf
+            <button class="btn-sair" type="submit">Terminar Sessão</button>
+        </form>
     </div>
 @endsection

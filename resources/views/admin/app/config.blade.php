@@ -43,7 +43,7 @@
             </a>
         </div>
 
-        <form action="{{ route('admin.sair') }}" method="GET" class="logout-form">
+        <form action="{{ route('admin.sair') }}" method="POST" class="logout-form">
             @csrf
             <button type="submit" class="btn-logout">
                 <svg xmlns="http://www.w3.org/2000/svg" class="icon-logout" fill="none" viewBox="0 0 24 24"

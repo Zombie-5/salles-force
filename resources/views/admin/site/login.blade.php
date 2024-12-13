@@ -5,7 +5,7 @@
         <img src="{{ asset('img/logo.jpg') }}" alt="Home" class="menu-icon-top">
         <h1 class="titulo" >SallesForce</h1>
         <span>Seja bem vindo a area vip</span>
-        <form action={{ route('admin.login') }} method="post">
+        <form action={{ route('admin.auth') }} method="post">
             @csrf
             <input class="padrao" name="email" value="{{ old('email') }}" type="email" placeholder="Email">
             {{ $errors->has('email') ? $errors->first('email') : '' }}
