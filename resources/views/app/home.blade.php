@@ -3,15 +3,28 @@
 @section('conteudo')
     <div class="conteudo-pagina">
         <main class="main">
-            <div class="hero-banner">
-                <div class="carrousel">
-                    <div class="carrousel-inner">
-                        <img src="{{ asset('carrousel/8.jpg') }}" alt="Farm scene with barn and cows">
-                        <img src="{{ asset('carrousel/9.jpg') }}" alt="Beautiful field">
-                        <img src="{{ asset('carrousel/10.jpg') }}" alt="Farm sunset view">
-                    </div>
+
+            <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                  <div class="carousel-item active">
+                    <img src="{{ asset('carrousel/8.jpg') }}" class="d-block w-100" alt="Farm scene with barn and cows">
+                  </div>
+                  <div class="carousel-item">
+                    <img src="{{ asset('carrousel/9.jpg') }}" class="d-block w-100" alt="Beautiful field">
+                  </div>
+                  <div class="carousel-item">
+                    <img src="{{ asset('carrousel/10.jpg') }}" class="d-block w-100" alt="Farm sunset view">
+                  </div>
                 </div>
-            </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Next</span>
+                </button>
+              </div>
 
             <section class="news-section">
                 <div class="news-header">
