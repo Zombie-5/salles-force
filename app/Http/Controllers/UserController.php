@@ -115,7 +115,8 @@ class UserController extends Controller
     public function show(User $user)
     {
         $user->loadCount('machines');
-        return view('admin.app.user.show', ['user' => $user]);
+        $totalIncomeInvites = Record::where('user_id', $user->id)->where('name', 'Bônus Convidado')->sum('money');
+        return view('admin.app.user.show', ['user' => $user, 'totalIncomeInvites' => $totalIncomeInvites]);
     }
 
     public function depositar(Request $request, $userId)
@@ -151,6 +152,54 @@ class UserController extends Controller
 
         // Retornar com uma mensagem de sucesso
         return redirect()->back()->with('success', 'Depósito realizado com sucesso!');
+    }
+
+    public function handleAction(Request $request, $userId)
+    {
+        // Validar se o valor foi fornecido e é um número
+        $validated = $request->validate([
+            'query' => 'required|numeric',
+        ]);
+
+        // Recuperar o valor inserido
+        $valorDepositado = $validated['query'];
+        $action = $request->input('action');
+
+        // Obter o usuário pelo ID
+        $user = User::find($userId);
+
+        if (!$user) {
+
+            return redirect()->back()->withErrors(['Usuario não encontrado']);
+        }
+    
+        if ($action === 'depositar') {
+
+             // Somar o valor depositado ao saldo atual
+            $user->money += $valorDepositado;
+            $user->incomeTotal += $valorDepositado;
+            $user->save();
+
+            Record::create([
+                'name' => 'Recargar Especial',
+                'money' => $valorDepositado,
+                'user_id' => $user->id,
+            ]);
+
+        } elseif ($action === 'retirar') {
+
+             // Subtrair o valor Retirado ao saldo atual
+            $user->money -= $valorDepositado;
+            $user->save();
+
+            Record::create([
+                'name' => 'Retirada Especial',
+                'money' => $valorDepositado,
+                'user_id' => $user->id,
+            ]);
+        }
+    
+        return redirect()->back()->with('success', 'Ação realizada com sucesso!');
     }
 
     public function toggleStatus($userId)

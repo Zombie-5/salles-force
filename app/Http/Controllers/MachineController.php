@@ -118,9 +118,12 @@ class MachineController extends Controller
      * @param  \App\Machine  $machine
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Machine $machine)
+    public function destroy($id)
     {
-        //
+        $machine = Machine::findOrFail($id); // Encontra a máquina pelo ID
+        $machine->delete(); // Exclui a máquina
+    
+        return redirect()->route('admin.machine.index')->with('success', 'Máquina excluída com sucesso!');
     }
 
     public function toggleStatus(Machine $machine)

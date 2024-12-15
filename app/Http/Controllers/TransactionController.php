@@ -17,11 +17,38 @@ class TransactionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $transactions = Transaction::orderBy('created_at', 'desc')->where('status','!=', 'pendente')->where('status','!=', 'processando')->get();
-        $transactionsDeposited = Transaction::orderBy('created_at', 'desc')->where('status','!=', 'concluido')->where('status','!=', 'rejeitado')->where('action', 'depositar')->get();//where('status', 'concluido')->sum('money');
-        $transactionsWithdrawn = Transaction::orderBy('created_at', 'desc')->where('status','!=', 'concluido')->where('status','!=', 'rejeitado')->where('action', 'retirar')->get();
+         // Obtém o valor da pesquisa
+         $query = $request->input('query');
+
+         // Verifica se há uma pesquisa ou retorna todos os usuários
+         if ($query) {
+
+            $transactionsDeposited = Transaction::orderBy('created_at', 'desc')
+                ->where('userId', $query)
+                ->where('status','!=', 'concluido')
+                ->where('status','!=', 'rejeitado')
+                ->where('action', 'depositar')
+                ->get();
+            
+            $transactionsWithdrawn = Transaction::orderBy('created_at', 'desc')
+                ->where('userId', $query)
+                ->where('status','!=', 'concluido')
+                ->where('status','!=', 'rejeitado')
+                ->where('action', 'retirar')
+                ->get();
+
+            $transactions = Transaction::orderBy('created_at', 'desc')
+                ->where('status','!=', 'pendente')
+                ->where('status','!=', 'processando')
+                ->get();
+            
+         } else {
+            $transactionsDeposited = Transaction::orderBy('created_at', 'desc')->where('status','!=', 'concluido')->where('status','!=', 'rejeitado')->where('action', 'depositar')->get();
+            $transactionsWithdrawn = Transaction::orderBy('created_at', 'desc')->where('status','!=', 'concluido')->where('status','!=', 'rejeitado')->where('action', 'retirar')->get();
+            $transactions = Transaction::orderBy('created_at', 'desc')->where('status','!=', 'pendente')->where('status','!=', 'processando')->get();
+         }
 
         return view('admin.app.transaction', ['transactions' => $transactions, 'transactionsDeposited' => $transactionsDeposited, 'transactionsWithdrawn' => $transactionsWithdrawn]);
     }

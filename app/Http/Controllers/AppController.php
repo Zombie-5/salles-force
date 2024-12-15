@@ -6,6 +6,7 @@ use App\Machine;
 use App\Transaction;
 use App\Record;
 use App\Banco;
+use Carbon\Carbon;
 use App\User;
 use App\MachineUser;
 use App\Notice;
@@ -26,6 +27,13 @@ class AppController extends Controller
 
     public function home()
     {
+        $userId = Auth::user();
+        $user = User::find($userId->id);
+
+        if ($user->last_reset_income_today !== Carbon::now()->toDateString()) {
+            $this->decrementMachineRemaining($user);
+        }
+
         $inviteLink = $this->generateInviteLink();
         $notices = Notice::orderBy('created_at', 'desc')->where('isActive', true)->get();
         return view('app.home', compact('inviteLink', 'notices'));
@@ -86,6 +94,11 @@ class AppController extends Controller
     public function profile()
     {
         $user = Auth::user();
+
+        if ($user->last_reset_income_today !== Carbon::now()->toDateString()) {
+            $this->decrementMachineRemaining($user);
+        }
+        
         return view('app.profile', ['user' => $user]);
     }
 
@@ -97,7 +110,7 @@ class AppController extends Controller
 
     public function machine()
     {
-        $machines = Machine::orderBy('id', 'desc')->get();
+        $machines = Machine::orderBy('price', 'asc')->get();
 
         $machinesData = $machines->map(function ($machine) {
 
@@ -174,4 +187,35 @@ class AppController extends Controller
     {
         return view('app.services');
     }
+
+    // 
+    private function decrementMachineRemaining($user)
+    {
+        // Recuperar todas as máquinas do usuário com os dados da pivot
+        $machines = $user->machines()->withPivot('remainingTotal')->get();
+
+        // Iterar pelas máquinas para decrementar remainingTotal
+        foreach ($machines as $machine) {
+
+            // Decrementar o campo remainingTotal na pivot
+            $newRemainingTotal = $machine->pivot->remainingTotal - 1;
+
+            if ($newRemainingTotal > 0) {
+                // Atualizar remainingTotal se ainda houver tempo restante
+                $user->machines()->updateExistingPivot($machine->id, [
+                    'remainingTotal' => $newRemainingTotal,
+                ]);
+            } else {
+                // Remover a relação se remainingTotal chegar a 0
+                $user->machines()->detach($machine->id);
+                $user->incomeDaily -= $machine->income;
+                $user->save();
+            }
+        }
+        // bellow
+        $user->incomeToday = 0;
+        $user->last_reset_income_today = Carbon::now()->toDateString();
+        $user->save();
+    }
+
 }

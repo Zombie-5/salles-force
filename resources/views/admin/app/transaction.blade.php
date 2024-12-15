@@ -3,6 +3,12 @@
 @section('conteudo')
     <div class="conteudo-pagina-admin">
         <h1 class="titulo-pagina">Transações</h1>
+        
+        <form action="{{ route('transaction.index') }}" method="GET" class="input-btn" style="margin-top: -10px">
+            @csrf
+            <input type="text" name="query" placeholder="Pesquise pelo ID do Usuario">
+            <button type="submit">Pesquisar</button>
+        </form>
 
         <ul class="tab-list">
             <li class="tab-item">

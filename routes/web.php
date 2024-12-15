@@ -72,11 +72,15 @@ Route::middleware('autenticacao')->prefix('/master')->group(function () {
     Route::post('/set-status/{user}', 'UserController@toggleStatus')->name('admin.user.status');
     Route::post('/coletar-recompensas', 'UserController@coletarRecompensas')->name('machines.collect');
 
+    Route::post('/depositar/retirar/{user}/admin', 'UserController@handleAction')->name('admin.action');
+
+
 
     Route::get('/transaction', 'TransactionController@index')->name('transaction.index');
     Route::patch('/transactions/{id}', 'TransactionController@updateStatus')->name('transaction.status');
     Route::post('/transaction/user', 'TransactionController@store')->name('transaction.store');
 
+    Route::delete('/admin/machine/{id}/delete', [MachineController::class, 'destroy'])->name('admin.machine.destroy');
     Route::get('/machine-list', 'MachineController@index')->name('admin.machine.index');
     Route::get('/machine-show/{machine}', 'MachineController@show')->name('admin.machine.show');
     Route::get('/machine-add', 'MachineController@create')->name('admin.machine.create');

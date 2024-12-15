@@ -2,10 +2,18 @@
 
 @section('conteudo')
     <div class="conteudo-pagina-admin">
-        <form action="{{ route('admin.machine.edit', $machine->id) }}" method="get" class="input-btn" style="justify-content: end">
-            <button type="submit">Editar</button>
-            <a href="{{ route('admin.machine.index')}}">Voltar</a>
-        </form>
+        <div class="input-btn" style="justify-content: end; ">
+            <form action="{{ route('admin.machine.edit', $machine->id) }}" method="get" >
+                <button type="submit">Editar</button>
+            </form>
+            <form action="{{ route('admin.machine.destroy', $machine->id) }}" method="POST" >
+                @csrf
+                @method('DELETE')
+                <button type="submit" style="background:red; cursor: pointer;">
+                    Excluir
+                </button>
+            </form>
+        </div>
 
         <div class="responsive-table">
             <table>
@@ -36,10 +44,12 @@
                 <tr>
                     <th>Status</th>
                     <td>
-                        <form action="{{ route('admin.machine.status', $machine->id) }}" method="POST" style="display:inline;">
+                        <form action="{{ route('admin.machine.status', $machine->id) }}" method="POST"
+                            style="display:inline;">
                             @csrf
                             @method('POST')
-                            <button type="submit" style="border: none; background: none; cursor: pointer; color: {{ $machine->isActive ? 'green' : 'red' }};">
+                            <button type="submit"
+                                style="border: none; background: none; cursor: pointer; color: {{ $machine->isActive ? 'green' : 'red' }};">
                                 {{ $machine->isActive ? 'Activo' : 'Inactivo' }}
                             </button>
                         </form>
