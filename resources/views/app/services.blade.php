@@ -7,7 +7,7 @@
                 <h2 class="subtitulo-pagina">Grupos de Comunidade</h2>
                 <ul class="lista-links">
                     <li>
-                        <a href="https://chat.whatsapp.com/ID2sKpw67ywEQdssyX3ZcH" class="link-social whatsapp">
+                        <a href="https://chat.whatsapp.com/ID2sKpw67ywEQdssyH" class="link-social whatsapp">
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 24 24" fill="none"
                                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path
