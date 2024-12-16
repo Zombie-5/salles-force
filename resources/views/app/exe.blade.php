@@ -1,60 +1,234 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
-    <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-</head>
-<body>
-    <div class="dashboard">
-        <h1>Dashboard</h1>
+@extends('admin.app.layouts.basico')
 
-        <div class="stats-grid">
-            <div class="stat-myCard">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="icon">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
-                </svg>
-                <h2>Usuários Totais</h2>
-                <p>{{ $totalUsers }}</p>
-            </div>
-            <div class="stat-myCard">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="icon">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
-                </svg>
-                <h2>Usuários Ativos</h2>
-                <p>{{ $activeUsers }}</p>
-            </div>
-            <div class="stat-myCard">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="icon">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75M15 10.5a3 3 0 11-6 0 3 3 0 016 0zm3 0h.008v.008H18V10.5zm-12 0h.008v.008H6V10.5z" />
-                </svg>
-                <h2>Total Depositado</h2>
-                <p>R$ {{ number_format($totalDeposited, 2, ',', '.') }}</p>
-            </div>
-            <div class="stat-myCard">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="icon">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75M15 10.5a3 3 0 11-6 0 3 3 0 016 0zm3 0h.008v.008H18V10.5zm-12 0h.008v.008H6V10.5z" />
-                </svg>
-                <h2>Total Retirado</h2>
-                <p>R$ {{ number_format($totalWithdrawn, 2, ',', '.') }}</p>
-            </div>
-            <div class="stat-myCard">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="icon">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 14.25h13.5m-13.5 0a3 3 0 01-3-3m3 3a3 3 0 100 6h13.5a3 3 0 100-6m-16.5-3a3 3 0 013-3h13.5a3 3 0 013 3m-19.5 0a4.5 4.5 0 01.9-2.7L5.737 5.1a3.375 3.375 0 012.7-1.35h7.126c1.062 0 2.062.5 2.7 1.35l2.587 3.45a4.5 4.5 0 01.9 2.7m0 0a3 3 0 01-3 3m0 3h.008v.008h-.008v-.008zm0-6h.008v.008h-.008v-.008zm-3 6h.008v.008h-.008v-.008zm0-6h.008v.008h-.008v-.008z" />
-                </svg>
-                <h2>Número de Máquinas</h2>
-                <p>{{ $totalMachines }}</p>
-            </div>
-        </div>
+@section('conteudo')
+    <div class="conteudo-pagina-admin">
+        <h1 class="titulo-pagina">Transações</h1>
 
-        <div class="chart-container">
-            <canvas id="transactionsChart"></canvas>
+        <ul class="tab-list">
+            <li class="tab-item">
+                <a href="#n1" class="tab-link active" data-tab="n1">Depositos</a>
+            </li>
+            <li class="tab-item">
+                <a href="#n2" class="tab-link" data-tab="n2">Retiradas</a>
+            </li>
+            <li class="tab-item">
+                <a href="#n3" class="tab-link" data-tab="n3">Histórico</a>
+            </li>
+        </ul>
+
+        <div class="tab-content">
+
+            <div id="n1" class="tab-pane active">
+                <div class="input-btn" style="margin-top: -10px">
+                    <input type="text" id="searchDeposits" placeholder="Pesquise pelo ID do Usuário">
+                </div>
+                
+                <div class="responsive-table">
+                    <table id="tableDeposits">
+                        <thead>
+                            <tr>
+                                <th>ID do Usuário</th>
+                                <th>Ação</th>
+                                <th>Valor</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse ($transactionsDeposited as $transaction)
+                                <tr>
+                                    <td style="text-align: center">{{ $transaction->userId }}</td>
+                                    <td>{{ $transaction->action }}</td>
+                                    <td>{{ $transaction->money }}</td>
+                                    <td>
+                                        <form action="{{ route('transaction.status', $transaction->id) }}" method="POST">
+                                            @csrf
+                                            @method('PATCH')
+                                            <select name="status" onchange="this.form.submit()"
+                                                class="select {{ $transaction->status }}">
+                                                <option value="pendente"
+                                                    {{ $transaction->status == 'pendente' ? 'selected' : '' }}>
+                                                    Pendente
+                                                </option>
+                                                <option value="processando"
+                                                    {{ $transaction->status == 'processando' ? 'selected' : '' }}>
+                                                    Processando
+                                                </option>
+                                                <option value="concluido"
+                                                    {{ $transaction->status == 'concluido' ? 'selected' : '' }}>Aprovado
+                                                </option>
+                                                <option value="rejeitado"
+                                                    {{ $transaction->status == 'rejeitado' ? 'selected' : '' }}>Rejeitado
+                                                </option>
+                                            </select>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="4">Nenhuma Transação encontrada.</td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="n2" class="tab-pane">
+                <div class="input-btn" style="margin-top: -10px">
+                    <input type="text" id="searchWithdrawals" placeholder="Pesquise pelo ID do Usuário">
+                </div>
+                <div class="responsive-table">
+                    <table id="tableWithdrawals">
+                        <thead>
+                            <tr>
+                                <th>ID do Usuário</th>
+                                <th>Ação</th>
+                                <th>Valor</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse ($transactionsWithdrawn as $transaction)
+                                <tr>
+                                    <td style="text-align: center">{{ $transaction->userId }}</td>
+                                    <td>{{ $transaction->action }}</td>
+                                    <td>{{ $transaction->money }}</td>
+                                    <td>
+                                        <form action="{{ route('transaction.status', $transaction->id) }}" method="POST">
+                                            @csrf
+                                            @method('PATCH')
+                                            <select name="status" onchange="this.form.submit()"
+                                                class="select {{ $transaction->status }}">
+                                                <option value="pendente"
+                                                    {{ $transaction->status == 'pendente' ? 'selected' : '' }}>
+                                                    Pendente
+                                                </option>
+                                                <option value="processando"
+                                                    {{ $transaction->status == 'processando' ? 'selected' : '' }}>
+                                                    Processando
+                                                </option>
+                                                <option value="concluido"
+                                                    {{ $transaction->status == 'concluido' ? 'selected' : '' }}>Aprovado
+                                                </option>
+                                                <option value="rejeitado"
+                                                    {{ $transaction->status == 'rejeitado' ? 'selected' : '' }}>Rejeitado
+                                                </option>
+                                            </select>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="4">Nenhuma Transação encontrada.</td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="n3" class="tab-pane">
+                <div class="responsive-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID do Usuário</th>
+                                <th>Acção</th>
+                                <th>Valor</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse ($transactions as $transaction)
+                                <tr>
+                                    <td style="text-align: center">{{ $transaction->userId }}</td>
+                                    <td>{{ $transaction->action }}</td>
+                                    <td>{{ $transaction->money }}</td>
+
+                                    <td>
+                                        <!-- Formulário de alteração de status com select -->
+                                        <form action="{{ route('transaction.status', $transaction->id) }}" method="POST">
+                                            @csrf
+                                            @method('PATCH')
+                                            <select name="status" onchange="this.form.submit()"
+                                                class="select @if ($transaction->status == 'pendente') status-pendente @elseif ($transaction->status == 'processando') status-processando @elseif ($transaction->status == 'concluido') status-concluido @elseif ($transaction->status == 'rejeitado') status-rejeitado @endif">
+                                                <option value="pendente"
+                                                    {{ $transaction->status == 'pendente' ? 'selected' : '' }}>
+                                                    Pendente</option>
+                                                <option value="processando"
+                                                    {{ $transaction->status == 'processando' ? 'selected' : '' }}>
+                                                    Processando
+                                                </option>
+                                                <option value="concluido"
+                                                    {{ $transaction->status == 'concluido' ? 'selected' : '' }}>Aprovado
+                                                </option>
+                                                <option value="rejeitado"
+                                                    {{ $transaction->status == 'rejeitado' ? 'selected' : '' }}>Rejeitado
+                                                </option>
+                                            </select>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="4">Nenhuma Transação encontrada.</td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+                <br><br><br>
+            </div>
+
         </div>
+        <br><br><br>
     </div>
 
-    <script src="{{ asset('js/dashboard.js') }}"></script>
-</body>
-</html>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabs = document.querySelectorAll('.tab-link');
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const tabId = this.getAttribute('data-tab');
 
+                    // Remove active class from all tabs and panes
+                    document.querySelectorAll('.tab-link, .tab-pane').forEach(el => {
+                        el.classList.remove('active');
+                    });
+
+                    // Add active class to clicked tab and corresponding pane
+                    this.classList.add('active');
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Função para filtrar tabela
+            function filterTable(inputId, tableId) {
+                const input = document.getElementById(inputId);
+                const table = document.getElementById(tableId);
+                const rows = table.getElementsByTagName('tr');
+
+                input.addEventListener('keyup', function() {
+                    const filter = this.value.toLowerCase();
+
+                    // Iterar pelas linhas da tabela
+                    for (let i = 1; i < rows.length; i++) {
+                        const cell = rows[i].getElementsByTagName('td')[0]; // Coluna ID do Usuário
+                        if (cell) {
+                            const textValue = cell.textContent || cell.innerText;
+                            rows[i].style.display = textValue.toLowerCase().indexOf(filter) > -1 ? '' :
+                                'none';
+                        }
+                    }
+                });
+            }
+
+            // Associar a função a cada input e tabela
+            filterTable('searchDeposits', 'tableDeposits');
+            filterTable('searchWithdrawals', 'tableWithdrawals');
+        });
+    </script>
+@endsection

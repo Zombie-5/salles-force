@@ -24,7 +24,7 @@
                 <h5 style="color: black">Regras de Retirada</h5>
                 <p>1. Saque mínimo: 1.200 KZ.</p>
                 <p>2. Taxa de retirada: 14%.</p>
-                <p>3. Horário para solicitação de saque: das 9h às 14h, de segunda a sexta-feira.</p>
+                <p>3. Horário para solicitação de saque: das 10h às 15h, de segunda a sexta-feira.</p>
                 <p>4. Após a solicitação de saque, os fundos serão transferidos para a conta em até 72 horas úteis. Caso o prazo de 72 horas seja excedido, entre em contato com o apoio ao cliente.</p>
             </div>
         </form>

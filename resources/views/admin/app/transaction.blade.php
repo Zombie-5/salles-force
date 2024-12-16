@@ -4,12 +4,6 @@
     <div class="conteudo-pagina-admin">
         <h1 class="titulo-pagina">Transações</h1>
         
-        <form action="{{ route('transaction.index') }}" method="GET" class="input-btn" style="margin-top: -10px">
-            @csrf
-            <input type="text" name="query" placeholder="Pesquise pelo ID do Usuario">
-            <button type="submit">Pesquisar</button>
-        </form>
-
         <ul class="tab-list">
             <li class="tab-item">
                 <a href="#n1" class="tab-link active" data-tab="n1">Depositos</a>
@@ -25,8 +19,12 @@
         <div class="tab-content">
 
             <div id="n1" class="tab-pane active">
+                <div class="input-btn" style="margin-top: -10px">
+                    <input type="text" id="searchDeposits" placeholder="Pesquise pelo ID do Usuário">
+                </div>
+
                 <div class="responsive-table">
-                    <table>
+                    <table id="tableDeposits">
                         <thead>
                             <tr>
                                 <th>ID do Usuário</th>
@@ -78,8 +76,12 @@
             </div>
 
             <div id="n2" class="tab-pane">
+                <div class="input-btn" style="margin-top: -10px">
+                    <input type="text" id="searchWithdrawals" placeholder="Pesquise pelo ID do Usuário">
+                </div>
+
                 <div class="responsive-table">
-                    <table>
+                    <table id="tableWithdrawals">
                         <thead>
                             <tr>
                                 <th>ID do Usuário</th>
@@ -131,8 +133,13 @@
             </div>
 
             <div id="n3" class="tab-pane">
+
+                <div class="input-btn" style="margin-top: -10px">
+                    <input type="text" id="searchAlls" placeholder="Pesquise pelo ID do Usuário">
+                </div>
+
                 <div class="responsive-table">
-                    <table>
+                    <table id="tableAlls" >
                         <thead>
                             <tr>
                                 <th>ID do Usuário</th>
@@ -205,6 +212,34 @@
                     document.getElementById(tabId).classList.add('active');
                 });
             });
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Função para filtrar tabela
+            function filterTable(inputId, tableId) {
+                const input = document.getElementById(inputId);
+                const table = document.getElementById(tableId);
+                const rows = table.getElementsByTagName('tr');
+
+                input.addEventListener('keyup', function() {
+                    const filter = this.value.toLowerCase();
+
+                    // Iterar pelas linhas da tabela
+                    for (let i = 1; i < rows.length; i++) {
+                        const cell = rows[i].getElementsByTagName('td')[0]; // Coluna ID do Usuário
+                        if (cell) {
+                            const textValue = cell.textContent || cell.innerText;
+                            rows[i].style.display = textValue.toLowerCase().indexOf(filter) > -1 ? '' :
+                                'none';
+                        }
+                    }
+                });
+            }
+
+            // Associar a função a cada input e tabela
+            filterTable('searchDeposits', 'tableDeposits');
+            filterTable('searchWithdrawals', 'tableWithdrawals');
+            filterTable('searchAlls', 'tableAlls');
         });
     </script>
 @endsection

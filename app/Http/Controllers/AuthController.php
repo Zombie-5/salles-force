@@ -137,7 +137,6 @@ class AuthController extends Controller
 
         // Verificar se o administrador com o email informado existe e autenticar
         $admin = User::where('telefone', $email)->first();
-        
         if ($admin && Hash::check($password, $admin->password)) {
 
             // Usar o Auth guard para autenticar o admin
@@ -148,7 +147,7 @@ class AuthController extends Controller
             return redirect()->route('admin.dashboard')->with('success', 'logado com sucesso!');
         } else {
             // Se o administrador não existir ou a senha não corresponder
-            return redirect()->route('admin.login', ['error' => "1"]);
+            return redirect()->route('admin.login')->withErrors(['Credencias Invalidas']);;
         }
     }
 

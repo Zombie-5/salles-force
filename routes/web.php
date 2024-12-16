@@ -20,7 +20,7 @@ Route::post('/cadastrar', 'UserController@store')->name('site.cadastro.auth');
 Route::get('', 'AuthController@login')->name('site.login');
 Route::post('/login', 'AuthController@autenticar')->name('site.auth');
 
-Route::get('/master/login/{error?}', 'AuthController@loginAdmin')->name('admin.login');
+Route::get('/master/login', 'AuthController@loginAdmin')->name('admin.login');
 Route::post('/master/login', 'AuthController@autenticarAdmin')->name('admin.auth');
 
 Route::fallback(function () {
