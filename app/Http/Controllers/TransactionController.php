@@ -201,11 +201,11 @@ class TransactionController extends Controller
 
              // Validação de entrada
             $request->validate([
-                'query' => 'required|numeric|min:10000',
+                'query' => 'required|numeric|min:5000',
             ], [
                 'query.required' => 'O montante é obrigatório.',
                 'query.numeric' => 'O montante deve ser númerico.',
-                'query.min' => 'O valor mínimo permitido para recarga é 10.000 kz',
+                'query.min' => 'O valor mínimo permitido para recarga é 5.000 kz',
             ]);
 
             $depositAmount = $request->input('query') ?: $request->input('custom_amount');
