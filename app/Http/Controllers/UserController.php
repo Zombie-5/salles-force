@@ -406,7 +406,7 @@ class UserController extends Controller
                 $superiorNivel1->save();
 
                 Record::create([
-                    'name' => 'Renda Convidado',
+                    'name' => 'Renda Convidado N1',
                     'money' => $comissaoNivel1,
                     'user_id' => $superiorNivel1->id,
                 ]);
@@ -422,7 +422,7 @@ class UserController extends Controller
                 $superiorNivel2->save();
 
                 Record::create([
-                    'name' => 'Renda Convidado',
+                    'name' => 'Renda Convidado N2',
                     'money' => $comissaoNivel2,
                     'user_id' => $superiorNivel2->id,
                 ]);
@@ -438,7 +438,7 @@ class UserController extends Controller
                 $superiorNivel3->save();
 
                 Record::create([
-                    'name' => 'Renda Convidado',
+                    'name' => 'Renda Convidado N3',
                     'money' => $comissaoNivel3,
                     'user_id' => $superiorNivel3->id,
                 ]);

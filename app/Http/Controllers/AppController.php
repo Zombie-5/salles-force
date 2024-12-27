@@ -72,7 +72,7 @@ class AppController extends Controller
             return $user;
         });
 
-        $totalIncomeInvites = Record::where('user_id', Auth::id())->where('name', 'Bônus Convidado')->sum('money');
+        $totalIncomeInvites = Record::where('user_id', Auth::id())->where('name', 'Bônus Convidado')->orWhere('name', 'like', '%Renda Convidado%')->sum('money');
         $totalInvites = $totalNivel1 + $totalNivel2 + $totalNivel3;
 
         // Passar as variáveis para a view
