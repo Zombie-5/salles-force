@@ -201,7 +201,7 @@ class TransactionController extends Controller
 
              // Validação de entrada
             $request->validate([
-                'query' => 'required|numeric|min:5000',
+                'query' => 'required|numeric|min:10000',
             ], [
                 'query.required' => 'O montante é obrigatório.',
                 'query.numeric' => 'O montante deve ser númerico.',
@@ -224,11 +224,12 @@ class TransactionController extends Controller
         } elseif ($action === 'retirar') {
 
             $request->validate([
-                'query' => 'required|numeric|min:1200',
+                'query' => 'required|numeric|min:1200|max:50000',
             ], [
                 'query.required' => 'O montante é obrigatório.',
                 'query.numeric' => 'O montante deve ser númerico.',
-                'query.min' => 'O valor mínimo permitido para retirada é 1200 kz',
+                'query.min' => 'O valor mínimo permitido para retirada é 1.200 kz',
+                'query.max' => 'O valor maximo permitido para retirada é 50.000 kz',
             ]);
 
             if (!$user->isVip) {
@@ -252,6 +253,10 @@ class TransactionController extends Controller
                 return back()->withErrors(['O horário para solicitação de saque é das 9h às 14h, de segunda a sexta-feira.']);
             }
 
+            if ($user->last_withdraw === Carbon::now()->toDateString()) {
+                return back()->withErrors(['O limite permitido é de um saque por dia.']);
+            }
+
             $depositAmount = $request->input('query');
 
             if ($depositAmount > $user->money) {
@@ -271,6 +276,7 @@ class TransactionController extends Controller
             ]);
 
             $user->money -= $depositAmount;
+            $user->last_withdraw = Carbon::now()->toDateString();
             $user->save();
 
             return redirect()->route('app.records.withdraw')->with('success', 'Retirada solicitada com sucesso!');

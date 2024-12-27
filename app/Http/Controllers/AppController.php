@@ -110,7 +110,7 @@ class AppController extends Controller
 
     public function machine()
     {
-        $machines = Machine::orderBy('price', 'asc')->get();
+        $machines = Machine::where('id','!=', 10 )->orderBy('price', 'asc')->get();
 
         $machinesData = $machines->map(function ($machine) {
 

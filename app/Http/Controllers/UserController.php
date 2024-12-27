@@ -394,6 +394,55 @@ class UserController extends Controller
                 'money' => $income,
                 'user_id' => $user->id,
             ]);
+
+            /* Recompensando */
+            // Comissão de 4% para o superior de nível 1 (direto)
+            $superiorNivel1 = User::find($user->userId);
+            if ($superiorNivel1 && $superiorNivel1->isVip) {
+                $comissaoNivel1 = $income * 0.04;
+                $superiorNivel1->money += $comissaoNivel1;
+                $superiorNivel1->incomeToday += $comissaoNivel1;
+                $superiorNivel1->incomeTotal += $comissaoNivel1;
+                $superiorNivel1->save();
+
+                Record::create([
+                    'name' => 'Renda Convidado',
+                    'money' => $comissaoNivel1,
+                    'user_id' => $superiorNivel1->id,
+                ]);
+            }
+
+            // Comissão de 3% para o superior de nível 2 (indiretamente)
+            $superiorNivel2 = User::find($superiorNivel1 ? $superiorNivel1->userId : null);
+            if ($superiorNivel2 && $superiorNivel2->isVip) {
+                $comissaoNivel2 = $income * 0.03;
+                $superiorNivel2->money += $comissaoNivel2;
+                $superiorNivel2->incomeToday += $comissaoNivel2;
+                $superiorNivel2->incomeTotal += $comissaoNivel2;
+                $superiorNivel2->save();
+
+                Record::create([
+                    'name' => 'Renda Convidado',
+                    'money' => $comissaoNivel2,
+                    'user_id' => $superiorNivel2->id,
+                ]);
+            }
+
+            // Comissão de 2% para o superior de nível 3 (indiretamente)
+            $superiorNivel3 = User::find($superiorNivel2 ? $superiorNivel2->userId : null);
+            if ($superiorNivel3 && $superiorNivel3->isVip) {
+                $comissaoNivel3 = $income * 0.02;
+                $superiorNivel3->money += $comissaoNivel3;
+                $superiorNivel3->incomeToday += $comissaoNivel3;
+                $superiorNivel3->incomeTotal += $comissaoNivel3;
+                $superiorNivel3->save();
+
+                Record::create([
+                    'name' => 'Renda Convidado',
+                    'money' => $comissaoNivel3,
+                    'user_id' => $superiorNivel3->id,
+                ]);
+            }
         }
 
         return redirect()->back()->with('success', 'Recompensas coletadas com sucesso');
